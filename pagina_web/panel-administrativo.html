@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrativo | Alerta Escolar</title>
+    <meta name="description"
+        content="Panel de control administrativo completo para gestión escolar. Dashboard, reportes, comunicados y control total del sistema de asistencia.">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="additional-styles.css">
+
+    <style>
+        /* Admin Panel Specific Styles */
+        .admin-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .admin-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .admin-hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            font-weight: 500;
+        }
+
+        .admin-badges {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .admin-badge {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .admin-badge:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .admin-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin: 80px 0;
+        }
+
+        .admin-feature {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .admin-feature:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .admin-feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .admin-feature:hover::before {
+            opacity: 1;
+        }
+
+        .admin-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .admin-feature:hover .admin-icon {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .admin-icon i {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .admin-feature h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .admin-feature p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .admin-feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .admin-feature-list li {
+            padding: 12px 0;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .admin-feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .admin-feature-list li::before {
+            content: '⚙️';
+            font-size: 1.2rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .dashboard-section {
+            background: linear-gradient(135deg, #f8fafc 0%, white 100%);
+            padding: 100px 0;
+        }
+
+        .dashboard-preview {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            margin-top: 60px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 100px;
+            left: 30px;
+            background: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Dashboard Main Image */
+        .dashboard-preview-hero {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .dashboard-main-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Components Section Styles */
+        .admin-components {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8fafc 0%, white 100%);
+        }
+
+        .admin-components h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: 80px;
+            line-height: 1.2;
+        }
+
+        .component-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 120px;
+            gap: 80px;
+        }
+
+        .component-row.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .component-content {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            width: 100%;
+        }
+
+        .component-info {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .component-info h3 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .component-info h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .component-info p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li i {
+            color: #28a745;
+            font-size: 1rem;
+        }
+
+        .component-mockup {
+            flex: 1;
+            text-align: center;
+        }
+
+        .component-mockup img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+            transition: all 0.3s ease;
+        }
+
+        .component-mockup img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (max-width: 768px) {
+            .admin-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .admin-hero p {
+                font-size: 1.1rem;
+            }
+
+            .back-button {
+                top: 80px;
+                left: 20px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .admin-features {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                margin: 60px 0;
+            }
+
+            .admin-feature {
+                padding: 35px 25px;
+            }
+
+            .dashboard-section {
+                padding: 80px 0;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .stat-card {
+                padding: 25px 20px;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .admin-components {
+                padding: 80px 0;
+            }
+
+            .admin-components h2 {
+                font-size: 2.2rem;
+                margin-bottom: 60px;
+            }
+
+            .component-row {
+                flex-direction: column;
+                margin-bottom: 80px;
+                gap: 40px;
+            }
+
+            .component-row.reverse {
+                flex-direction: column;
+            }
+
+            .component-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .component-info h3 {
+                font-size: 2rem;
+            }
+
+            .component-info h4 {
+                font-size: 1.1rem;
+            }
+
+            .component-info p {
+                font-size: 1.1rem;
+            }
+
+            .feature-list li {
+                font-size: 1rem;
+            }
+
+            .dashboard-main-image {
+                margin-top: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Back Button -->
+    <a href="sistema-control-asistencia-escolar.html" class="back-button" title="Volver al software">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
+    <!-- Hero Section -->
+    <section class="admin-hero">
+        <div class="container">
+            <h1>Dashboard Completo de Control Escolar</h1>
+            <p>Plataforma administrativa integral con cuenta centralizada para gestionar asistencia, comunicados,
+                horarios y directorio estudiantil en tiempo real</p>
+
+            <div class="admin-badges">
+                <div class="admin-badge">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard Centralizado
+                </div>
+                <div class="admin-badge">
+                    <i class="fas fa-users-cog"></i>
+                    Gestión Integral
+                </div>
+                <div class="admin-badge">
+                    <i class="fas fa-clock"></i>
+                    Tiempo Real
+                </div>
+                <div class="admin-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    Control Total
+                </div>
+            </div>
+
+            <div class="dashboard-preview-hero">
+                <img src="images/admin_dashboard.png" alt="Dashboard Completo de Control Escolar"
+                    class="dashboard-main-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Components Section -->
+    <section class="admin-components">
+        <div class="container">
+            <h2>Componentes del Sistema Administrativo</h2>
+
+            <!-- Directorio de Estudiantes -->
+            <div class="component-row">
+                <div class="component-content">
+                    <div class="component-info">
+                        <h3>Directorio de Estudiantes</h3>
+                        <h4>Base de datos de estudiantes con filtros avanzados</h4>
+                        <p>Gestión completa de información estudiantil, contactos de emergencia y datos académicos</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i>Registro completo de datos estudiantiles</li>
+                            <li><i class="fas fa-check"></i>Contactos de emergencia actualizados</li>
+                            <li><i class="fas fa-check"></i>Filtros avanzados por grado, sección, estatus</li>
+                            <li><i class="fas fa-check"></i>Historial académico y disciplinario</li>
+                            <li><i class="fas fa-check"></i>Exportación de reportes y listas</li>
+                            <li><i class="fas fa-check"></i>Fotografías y documentos adjuntos</li>
+                            <li><i class="fas fa-check"></i>Generación automática de códigos QR</li>
+                        </ul>
+                    </div>
+                    <div class="component-mockup">
+                        <img src="images/dir_estudiantes/filtro.png" alt="Directorio de Estudiantes">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comunicados y Notificaciones -->
+            <div class="component-row reverse">
+                <div class="component-content">
+                    <div class="component-info">
+                        <h3>Comunicados y Notificaciones</h3>
+                        <h4>Panel de tipos de mensajes y comunicados</h4>
+                        <p>Envío masivo de comunicados, notificaciones push y mensajes dirigidos a padres de familia</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i>Diferentes tipos de mensajes (urgente, informativo,
+                                recordatorio)</li>
+                            <li><i class="fas fa-check"></i>Envío masivo a grupos específicos</li>
+                            <li><i class="fas fa-check"></i>Notificaciones push instantáneas</li>
+                            <li><i class="fas fa-check"></i>Programación de envíos automáticos</li>
+                            <li><i class="fas fa-check"></i>Confirmación de lectura</li>
+                            <li><i class="fas fa-check"></i>Plantillas predefinidas reutilizables</li>
+                            <li><i class="fas fa-check"></i>Historial completo de comunicados</li>
+                        </ul>
+                    </div>
+                    <div class="component-mockup">
+                        <img src="images/comunicados/tipo_mensaje.png" alt="Comunicados y Notificaciones">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Control de Asistencia -->
+            <div class="component-row">
+                <div class="component-content">
+                    <div class="component-info">
+                        <h3>Control de Asistencia</h3>
+                        <h4>Control de asistencia con filtros en tiempo real</h4>
+                        <p>Monitoreo en vivo de entradas y salidas con alertas automáticas de ausencias</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i>Monitoreo en tiempo real</li>
+                            <li><i class="fas fa-check"></i>Alertas automáticas de ausencias</li>
+                            <li><i class="fas fa-check"></i>Filtros por fecha, grado, estudiante</li>
+                            <li><i class="fas fa-check"></i>Reportes de puntualidad</li>
+                            <li><i class="fas fa-check"></i>Estadísticas de asistencia</li>
+                            <li><i class="fas fa-check"></i>Gráficos de tendencias</li>
+                            <li><i class="fas fa-check"></i>Notificaciones automáticas a padres</li>
+                        </ul>
+                    </div>
+                    <div class="component-mockup">
+                        <img src="images/control_asistencia/filtrado.png" alt="Control de Asistencia">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gestión de Horarios -->
+            <div class="component-row reverse">
+                <div class="component-content">
+                    <div class="component-info">
+                        <h3>Gestión de Horarios</h3>
+                        <h4>Configuración y gestión de horarios escolares</h4>
+                        <p>Configuración de horarios escolares, eventos especiales y calendarios académicos</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i>Creación de horarios por grado y sección</li>
+                            <li><i class="fas fa-check"></i>Gestión de eventos especiales</li>
+                            <li><i class="fas fa-check"></i>Calendarios académicos</li>
+                            <li><i class="fas fa-check"></i>Sincronización automática</li>
+                            <li><i class="fas fa-check"></i>Notificación de cambios</li>
+                            <li><i class="fas fa-check"></i>Horarios variables por día</li>
+                            <li><i class="fas fa-check"></i>Configuración de días no laborales</li>
+                        </ul>
+                    </div>
+                    <div class="component-mockup">
+                        <img src="images/horarios/gestion_horarios.png" alt="Gestión de Horarios">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Configuración Escolar -->
+            <div class="component-row">
+                <div class="component-content">
+                    <div class="component-info">
+                        <h3>Configuración Escolar</h3>
+                        <h4>Panel de configuración de la escuela</h4>
+                        <p>Personalización completa: logos, colores institucionales, información de contacto y políticas
+                        </p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i>Personalización de logos y colores</li>
+                            <li><i class="fas fa-check"></i>Información institucional</li>
+                            <li><i class="fas fa-check"></i>Configuración de políticas</li>
+                            <li><i class="fas fa-check"></i>Datos de contacto</li>
+                            <li><i class="fas fa-check"></i>Configuración de usuarios</li>
+                            <li><i class="fas fa-check"></i>Roles y permisos</li>
+                            <li><i class="fas fa-check"></i>Respaldo de configuración</li>
+                        </ul>
+                    </div>
+                    <div class="component-mockup">
+                        <img src="images/configuracion_escolar/config.png" alt="Configuración Escolar">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Escáner QR Centralizado -->
+            <div class="component-row reverse">
+                <div class="component-content">
+                    <div class="component-info">
+                        <h3>Escáner QR Centralizado</h3>
+                        <h4>Interfaz centralizada del escáner QR</h4>
+                        <p>Control del sistema de escaneo con tablet centralizada y monitoreo de actividad en tiempo
+                            real</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i>Interfaz centralizada para tablet</li>
+                            <li><i class="fas fa-check"></i>Monitoreo de actividad en tiempo real</li>
+                            <li><i class="fas fa-check"></i>Control de múltiples puntos de acceso</li>
+                            <li><i class="fas fa-check"></i>Alertas de intentos no autorizados</li>
+                            <li><i class="fas fa-check"></i>Log completo de actividad</li>
+                            <li><i class="fas fa-check"></i>Estadísticas de uso del escáner</li>
+                            <li><i class="fas fa-check"></i>Configuración de horarios de operación</li>
+                        </ul>
+                    </div>
+                    <div class="component-mockup">
+                        <img src="images/escaner_qr.png" alt="Escáner QR Centralizado">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Preview -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__tag">📊 VISTA PREVIA DEL DASHBOARD</span>
+                <h2 class="section__title">Información Centralizada y Clara</h2>
+                <p class="section__description">
+                    Ejemplo de las métricas y estadísticas que verás en el panel administrativo
+                </p>
+            </div>
+
+            <div class="dashboard-preview">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">1,247</span>
+                        <span class="stat-label">Estudiantes Activos</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">98.2%</span>
+                        <span class="stat-label">Asistencia Promedio</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">892</span>
+                        <span class="stat-label">Familias Registradas</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">15,340</span>
+                        <span class="stat-label">Registros Este Mes</span>
+                    </div>
+                </div>
+
+                <div style="text-align: center; padding: 40px; background: #f8fafc; border-radius: 16px;">
+                    <h3 style="margin-bottom: 20px; color: var(--text-primary);">🚀 ¿Listo para Implementar?</h3>
+                    <p style="margin-bottom: 30px; color: var(--text-secondary);">Solicita una demostración
+                        personalizada del panel administrativo</p>
+                    <a href="../index.html#pricing" class="btn btn--primary"
+                        style="padding: 18px 35px; font-size: 1.1rem; background: linear-gradient(135deg, #667eea, #764ba2); border: none;">
+                        <i class="fas fa-desktop" style="margin-right: 10px;"></i>
+                        Solicitar Demo del Panel
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (simplified) -->
+    <footer class="footer" style="background: var(--text-primary); color: white; padding: 40px 0; text-align: center;">
+        <div class="container">
+            <p>&copy; 2024 Alerta Escolar. Todos los derechos reservados.</p>
+            <p style="margin-top: 10px; opacity: 0.7;">
+                <a href="sistema-control-asistencia-escolar.html" style="color: white; text-decoration: none;">← Volver
+                    al software</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+
+</html>

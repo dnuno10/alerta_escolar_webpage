@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App para Padres | Alerta Escolar</title>
+    <meta name="description"
+        content="Aplicación móvil para padres de familia. Notificaciones instantáneas, historial de asistencia y comunicación directa con la escuela.">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="additional-styles.css">
+
+    <style>
+        /* Parent App Specific Styles */
+        .parent-hero {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .parent-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .parent-hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            font-weight: 500;
+        }
+
+        .parent-badges {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .parent-badge {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .parent-badge:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .parent-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin: 80px 0;
+        }
+
+        .parent-feature {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .parent-feature:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .parent-feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .parent-feature:hover::before {
+            opacity: 1;
+        }
+
+        .parent-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 30px rgba(240, 147, 251, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .parent-feature:hover .parent-icon {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(240, 147, 251, 0.4);
+        }
+
+        .parent-icon i {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .parent-feature h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .parent-feature p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .parent-feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .parent-feature-list li {
+            padding: 12px 0;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .parent-feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .parent-feature-list li::before {
+            content: '💖';
+            font-size: 1.2rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .download-section {
+            background: linear-gradient(135deg, #f8fafc 0%, white 100%);
+            padding: 100px 0;
+        }
+
+        .app-store-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 60px 0;
+        }
+
+        .store-button {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .store-button:hover {
+            transform: scale(1.05);
+        }
+
+        .store-button img {
+            height: 70px;
+            border-radius: 12px;
+        }
+
+        .testimonial-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .testimonial-role {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 100px;
+            left: 30px;
+            background: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .parent-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .parent-hero p {
+                font-size: 1.1rem;
+            }
+
+            .back-button {
+                top: 80px;
+                left: 20px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .parent-features {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                margin: 60px 0;
+            }
+
+            .parent-feature {
+                padding: 35px 25px;
+            }
+
+            .download-section {
+                padding: 80px 0;
+            }
+
+            .app-store-buttons {
+                gap: 20px;
+            }
+
+            .store-button img {
+                height: 60px;
+            }
+
+            .testimonial-cards {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .testimonial-card {
+                padding: 30px 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Back Button -->
+    <a href="sistema-control-asistencia-escolar.html" class="back-button" title="Volver al software">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
+    <!-- Hero Section -->
+    <section class="parent-hero">
+        <div class="container">
+            <h1>App para Padres</h1>
+            <p>La tranquilidad que necesitas al alcance de tu mano. Mantente conectado con la escuela de tus hijos y
+                recibe notificaciones instantáneas sobre su asistencia y actividades escolares.</p>
+
+            <div class="parent-badges">
+                <div class="parent-badge">
+                    <i class="fas fa-bell"></i>
+                    Notificaciones Instantáneas
+                </div>
+                <div class="parent-badge">
+                    <i class="fas fa-mobile-alt"></i>
+                    iOS y Android
+                </div>
+                <div class="parent-badge">
+                    <i class="fas fa-heart"></i>
+                    Tranquilidad Total
+                </div>
+                <div class="parent-badge">
+                    <i class="fas fa-users"></i>
+                    Múltiples Hijos
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parent Features -->
+    <section class="section">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__tag">📱 CARACTERÍSTICAS PARA PADRES</span>
+                <h2 class="section__title">Todo lo que Necesitas Saber de tus Hijos</h2>
+                <p class="section__description">
+                    Diseñada especialmente para mantener a los padres informados y tranquilos sobre sus hijos
+                </p>
+            </div>
+
+            <div class="parent-features">
+                <!-- Instant Notifications -->
+                <div class="parent-feature">
+                    <div class="parent-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Notificaciones Instantáneas</h3>
+                    <p>Recibe alertas en tiempo real cada vez que tu hijo entre o salga de la escuela</p>
+                    <ul class="parent-feature-list">
+                        <li>Notificación de entrada a la escuela</li>
+                        <li>Alerta de salida de la institución</li>
+                        <li>Hora exacta de cada registro</li>
+                        <li>Foto del momento del escaneo</li>
+                        <li>Ubicación del punto de control</li>
+                        <li>Estado de confirmación del registro</li>
+                    </ul>
+                </div>
+
+                <!-- Attendance History -->
+                <div class="parent-feature">
+                    <div class="parent-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3>Historial Completo</h3>
+                    <p>Acceso total al registro histórico de asistencia de tus hijos con búsqueda avanzada</p>
+                    <ul class="parent-feature-list">
+                        <li>Historial diario, semanal y mensual</li>
+                        <li>Búsqueda por fechas específicas</li>
+                        <li>Estadísticas de puntualidad</li>
+                        <li>Comparativas de períodos anteriores</li>
+                        <li>Exportación de reportes personales</li>
+                        <li>Gráficos de tendencias de asistencia</li>
+                    </ul>
+                </div>
+
+                <!-- School Communications -->
+                <div class="parent-feature">
+                    <div class="parent-icon">
+                        <i class="fas fa-comment-alt"></i>
+                    </div>
+                    <h3>Comunicados Escolares</h3>
+                    <p>Recibe comunicados oficiales de la escuela directamente en tu dispositivo móvil</p>
+                    <ul class="parent-feature-list">
+                        <li>Comunicados institucionales importantes</li>
+                        <li>Avisos de eventos y actividades</li>
+                        <li>Cambios de horario o calendario</li>
+                        <li>Recordatorios de reuniones</li>
+                        <li>Confirmación de lectura automática</li>
+                        <li>Archivo de comunicados anteriores</li>
+                    </ul>
+                </div>
+
+                <!-- Multiple Children -->
+                <div class="parent-feature">
+                    <div class="parent-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Múltiples Hijos</h3>
+                    <p>Gestiona la información de todos tus hijos desde una sola aplicación</p>
+                    <ul class="parent-feature-list">
+                        <li>Perfiles individuales por hijo</li>
+                        <li>Cambio rápido entre perfiles</li>
+                        <li>Notificaciones diferenciadas por hijo</li>
+                        <li>Horarios personalizados por cada uno</li>
+                        <li>Estadísticas comparativas familiares</li>
+                        <li>Vista consolidada de toda la familia</li>
+                    </ul>
+                </div>
+
+                <!-- Updated Schedules -->
+                <div class="parent-feature">
+                    <div class="parent-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Horarios Actualizados</h3>
+                    <p>Mantente al día con los horarios escolares y cambios automáticos del calendario</p>
+                    <ul class="parent-feature-list">
+                        <li>Horarios de clases actualizados</li>
+                        <li>Calendario escolar sincronizado</li>
+                        <li>Notificación de cambios de horario</li>
+                        <li>Eventos especiales y feriados</li>
+                        <li>Horarios de entrada y salida</li>
+                        <li>Integración con calendar personal</li>
+                    </ul>
+                </div>
+
+                <!-- Direct Contact -->
+                <div class="parent-feature">
+                    <div class="parent-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Contacto Directo</h3>
+                    <p>Comunicación directa con la escuela a través de canales oficiales integrados</p>
+                    <ul class="parent-feature-list">
+                        <li>Chat directo con administración</li>
+                        <li>Solicitud de citas y reuniones</li>
+                        <li>Reportes de incidencias</li>
+                        <li>Solicitudes de permisos especiales</li>
+                        <li>Confirmación de actividades</li>
+                        <li>Feedback y sugerencias</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download-section">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__tag">📥 DESCARGA LA APP</span>
+                <h2 class="section__title">Disponible para iOS y Android</h2>
+                <p class="section__description">
+                    Descarga gratis la aplicación y mantente conectado con la educación de tus hijos
+                </p>
+            </div>
+
+            <div class="app-store-buttons">
+                <a href="#" class="store-button">
+                    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                        alt="Descargar en App Store">
+                </a>
+                <a href="#" class="store-button">
+                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/es_badge_web_generic.png"
+                        alt="Disponible en Google Play">
+                </a>
+            </div>
+
+            <div class="testimonial-cards">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Finalmente tengo la tranquilidad de saber exactamente cuándo mis hijos
+                        llegan y salen de la escuela. La app es muy fácil de usar."</p>
+                    <div class="testimonial-author">María González</div>
+                    <div class="testimonial-role">Madre de 2 estudiantes</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Las notificaciones instantáneas me han salvado muchas veces. Ahora sé
+                        si mi hijo llegó tarde o si salió temprano de clases."</p>
+                    <div class="testimonial-author">Carlos Rodríguez</div>
+                    <div class="testimonial-role">Padre de familia</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Poder ver el historial completo de asistencia de mis 3 hijos desde una
+                        sola app es increíble. Muy recomendada."</p>
+                    <div class="testimonial-author">Ana Martínez</div>
+                    <div class="testimonial-role">Madre de 3 estudiantes</div>
+                </div>
+            </div>
+
+            <div
+                style="text-align: center; margin-top: 60px; padding: 40px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+                <h3 style="margin-bottom: 20px; color: var(--text-primary);">🚀 ¿Tu Escuela Aún No Tiene Este Sistema?
+                </h3>
+                <p style="margin-bottom: 30px; color: var(--text-secondary);">Habla con la administración de la escuela
+                    y recomiéndales nuestro sistema</p>
+                <a href="../index.html#pricing" class="btn btn--primary"
+                    style="padding: 18px 35px; font-size: 1.1rem; background: linear-gradient(135deg, #f093fb, #f5576c); border: none;">
+                    <i class="fas fa-school" style="margin-right: 10px;"></i>
+                    Recomendar a mi Escuela
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (simplified) -->
+    <footer class="footer" style="background: var(--text-primary); color: white; padding: 40px 0; text-align: center;">
+        <div class="container">
+            <p>&copy; 2024 Alerta Escolar. Todos los derechos reservados.</p>
+            <p style="margin-top: 10px; opacity: 0.7;">
+                <a href="sistema-control-asistencia-escolar.html" style="color: white; text-decoration: none;">← Volver
+                    al software</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+
+</html>

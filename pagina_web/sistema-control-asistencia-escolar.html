@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Software Alerta Escolar - Sistema de Control de Asistencia iOS y Android</title>
+    <meta name="description"
+        content="Descubre el software de Alerta Escolar: aplicación móvil para iOS y Android con panel administrativo completo. Compatible con iPhone, iPad y dispositivos Android.">
+    <meta name="keywords"
+        content="sistema control asistencia escolar, control asistencia QR, tablet control escolar, lector QR físico escuela, notificaciones padres asistencia, software asistencia estudiantil">
+
+    <link rel="canonical" href="https://alertaescolar.com/sistema-control-asistencia-escolar.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="additional-styles.css">
+
+    <style>
+        /* Software Detail Page Specific Styles */
+        .software-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .software-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .software-hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            font-weight: 500;
+        }
+
+        .app-badges {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .app-badge {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .app-badge:hover {
+            transform: scale(1.05);
+        }
+
+        .app-badge img {
+            height: 60px;
+            border-radius: 12px;
+        }
+
+        .software-sides {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 50px;
+            margin: 80px 0;
+        }
+
+        .software-side {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .software-side:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .software-side::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .software-side:hover::before {
+            opacity: 1;
+        }
+
+        .software-side:first-child::before {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .software-side:last-child::before {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+
+        .side-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .side-icon.admin {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .side-icon.parent {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+
+        .software-side:hover .side-icon {
+            transform: scale(1.05);
+        }
+
+        .side-icon i {
+            font-size: 3rem;
+            color: white;
+        }
+
+        .software-side h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .software-side p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .side-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 40px 0;
+            text-align: left;
+        }
+
+        .side-features li {
+            padding: 12px 0;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .side-features li:last-child {
+            border-bottom: none;
+        }
+
+        .side-features li::before {
+            content: '✓';
+            color: #667eea;
+            font-weight: 700;
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .software-side:last-child .side-features li::before {
+            color: #f093fb;
+        }
+
+        .side-btn {
+            padding: 18px 35px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .software-side:first-child .side-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .software-side:last-child .side-btn {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+        }
+
+        .side-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .side-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .side-btn:hover i {
+            transform: translateX(4px);
+        }
+
+        .compatibility-section {
+            background: linear-gradient(135deg, #f8fafc 0%, white 100%);
+            padding: 80px 0;
+        }
+
+        .platform-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .platform-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .platform-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .platform-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 24px;
+        }
+
+        .platform-icon.ios {
+            background: linear-gradient(135deg, #007AFF, #0051D0);
+        }
+
+        .platform-icon.android {
+            background: linear-gradient(135deg, #34A853, #0F9D58);
+        }
+
+        .platform-icon.web {
+            background: linear-gradient(135deg, #4285F4, #1A73E8);
+        }
+
+        .platform-icon i {
+            font-size: 3rem;
+            color: white;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 100px;
+            left: 30px;
+            background: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .software-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .software-hero p {
+                font-size: 1.1rem;
+            }
+
+            .back-button {
+                top: 80px;
+                left: 20px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .software-sides {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                margin: 60px 0;
+            }
+
+            .software-side {
+                padding: 40px 30px;
+            }
+
+            .side-icon {
+                width: 100px;
+                height: 100px;
+            }
+
+            .side-icon i {
+                font-size: 2.5rem;
+            }
+
+            .software-side h3 {
+                font-size: 1.7rem;
+            }
+
+            .compatibility-section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header/Navigation -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav__logo">
+                <img src="../alertaescolar/images/alertaescolar_logo.png" alt="Alerta Escolar" class="nav__logo-img">
+                <span class="nav__logo-text">Alerta Escolar</span>
+            </div>
+            <ul class="nav__menu" id="nav-menu">
+                <li class="nav__item">
+                    <a href="index.html" class="nav__link">Inicio</a>
+                </li>
+                <li class="nav__item">
+                    <a href="index.html#como-funciona" class="nav__link">Cómo Funciona</a>
+                </li>
+                <li class="nav__item">
+                    <a href="hardware-control-asistencia.html" class="nav__link">Hardware</a>
+                </li>
+                <li class="nav__item">
+                    <a href="credenciales-pvc.html" class="nav__link">Credenciales PVC</a>
+                </li>
+                <li class="nav__item">
+                    <a href="index.html#contacto" class="nav__link nav__cta">Solicitar Demo</a>
+                </li>
+            </ul>
+            <div class="nav__toggle" id="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Back Button -->
+    <a href="index.html" class="back-button" title="Volver al inicio">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
+    <!-- Hero Section -->
+    <section class="hero software-hero">
+        <div class="container">
+            <div class="hero__content">
+                <div class="hero__text">
+                    <h1 class="hero__title">
+                        <span class="hero__title-accent">Software Multiplataforma</span>
+                        <br>iOS y Android
+                    </h1>
+                    <p class="hero__description">
+                        Aplicación móvil nativa para padres de familia disponible en App Store y Google Play,
+                        más panel administrativo web completo para la gestión escolar.
+                    </p>
+                    <div class="hero__buttons">
+                        <a href="index.html#contacto" class="btn btn--primary">
+                            <i class="fas fa-download"></i>
+                            Solicitar Acceso
+                        </a>
+                        <a href="#caracteristicas" class="btn btn--secondary">
+                            <i class="fas fa-list"></i>
+                            Ver Características
+                        </a>
+                    </div>
+                </div>
+                <div class="hero__image">
+                    <div class="software-mockups">
+                        <div class="ios-mockup">
+                            <img src="images/software/ios-app.png" alt="App iOS Alerta Escolar" loading="lazy">
+                        </div>
+                        <div class="android-mockup">
+                            <img src="images/software/android-app.png" alt="App Android Alerta Escolar" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compatibilidad Multiplataforma -->
+    <section class="section platform-compatibility" id="caracteristicas">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__tag">📱 COMPATIBILIDAD</span>
+                <h2 class="section__title">Disponible en Todas las Plataformas</h2>
+                <p class="section__description">
+                    Nuestro software funciona perfectamente en iOS y Android, garantizando que todos los padres puedan
+                    usar la aplicación
+                </p>
+            </div>
+
+            <div class="platform-grid">
+                <div class="platform-detail-extended">
+                    <div class="platform-header">
+                        <i class="fab fa-apple"></i>
+                        <div>
+                            <h3>iOS - App Store</h3>
+                            <p>Compatible con iPhone y iPad</p>
+                        </div>
+                    </div>
+                    <div class="platform-features">
+                        <h4>Características iOS:</h4>
+                        <ul>
+                            <li>✓ iPhone (iOS 12.0 o superior)</li>
+                            <li>✓ iPad (iPadOS 13.0 o superior)</li>
+                            <li>✓ Notificaciones push nativas</li>
+                            <li>✓ Interfaz optimizada para iOS</li>
+                            <li>✓ Integración con Siri Shortcuts</li>
+                            <li>✓ Soporte para Face ID y Touch ID</li>
+                            <li>✓ Widgets para pantalla de inicio</li>
+                            <li>✓ Modo oscuro automático</li>
+                        </ul>
+                    </div>
+                    <div class="download-section">
+                        <a href="#" class="download-badge ios">
+                            <i class="fab fa-apple"></i>
+                            <div>
+                                <span>Descargar en</span>
+                                <strong>App Store</strong>
+                            </div>
+                        </a>
+                        <div class="rating">
+                            <span>4.9★</span>
+                            <small>(1,200+ reseñas)</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="platform-detail-extended">
+                    <div class="platform-header">
+                        <i class="fab fa-android"></i>
+                        <div>
+                            <h3>Android - Google Play</h3>
+                            <p>Compatible con teléfonos y tablets</p>
+                        </div>
+                    </div>
+                    <div class="platform-features">
+                        <h4>Características Android:</h4>
+                        <ul>
+                            <li>✓ Android 7.0 (API nivel 24) o superior</li>
+                            <li>✓ Tablets Android compatibles</li>
+                            <li>✓ Notificaciones push optimizadas</li>
+                            <li>✓ Material Design 3</li>
+                            <li>✓ Soporte para biometría</li>
+                            <li>✓ Widgets personalizables</li>
+                            <li>✓ Modo oscuro adaptativo</li>
+                            <li>✓ Optimización de batería</li>
+                        </ul>
+                    </div>
+                    <div class="download-section">
+                        <a href="#" class="download-badge android">
+                            <i class="fab fa-google-play"></i>
+                            <div>
+                                <span>Disponible en</span>
+                                <strong>Google Play</strong>
+                            </div>
+                        </a>
+                        <div class="rating">
+                            <span>4.7★</span>
+                            <small>(800+ reseñas)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Funcionalidades Principales -->
+    <section class="section main-features">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__tag">⚡ FUNCIONALIDADES</span>
+                <h2 class="section__title">Todo lo que Necesitas en una App</h2>
+                <p class="section__description">
+                    Funcionalidades completas tanto para padres como para administradores escolares
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Notificaciones Instantáneas</h3>
+                    <p>Alertas push inmediatas cuando el estudiante entra o sale de la escuela</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3>Historial Completo</h3>
+                    <p>Registro detallado de todas las entradas y salidas con fecha y hora exacta</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Múltiples Hijos</h3>
+                    <p>Gestiona varios estudiantes desde una sola cuenta familiar</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3>Comunicados Escolares</h3>
+                    <p>Recibe avisos importantes y comunicados directamente de la escuela</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Datos Seguros</h3>
+                    <p>Toda la información está protegida con encriptación de nivel bancario</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <h3>Funciona Offline</h3>
+                    <p>Consulta el historial aunque no tengas conexión a internet</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Panel Administrativo -->
+    <section class="section admin-panel">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__tag">🖥️ PANEL ADMINISTRATIVO</span>
+                <h2 class="section__title">Gestión Completa desde la Web</h2>
+                <p class="section__description">
+                    Plataforma web completa para que los administradores escolares gestionen todo el sistema
+                </p>
+            </div>
+
+            <div class="admin-features">
+                <div class="admin-feature">
+                    <div class="admin-feature-icon">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <div class="admin-feature-content">
+                        <h3>Gestión de Estudiantes</h3>
+                        <p>Registro, edición y administración completa del directorio estudiantil</p>
+                    </div>
+                </div>
+
+                <div class="admin-feature">
+                    <div class="admin-feature-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="admin-feature-content">
+                        <h3>Reportes en Tiempo Real</h3>
+                        <p>Estadísticas de asistencia, reportes personalizados y análisis de patrones</p>
+                    </div>
+                </div>
+
+                <div class="admin-feature">
+                    <div class="admin-feature-icon">
+                        <i class="fas fa-broadcast-tower"></i>
+                    </div>
+                    <div class="admin-feature-content">
+                        <h3>Envío de Comunicados</h3>
+                        <p>Notificaciones masivas y comunicados dirigidos a grupos específicos</p>
+                    </div>
+                </div>
+
+                <div class="admin-feature">
+                    <div class="admin-feature-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="admin-feature-content">
+                        <h3>Configuración Avanzada</h3>
+                        <p>Personalización completa: horarios, grupos, permisos y más</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">¿Listo para implementar el software?</h2>
+                <p class="cta-description">
+                    Solicita una demo del software completo y descubre todas las funcionalidades
+                </p>
+                <div class="cta-buttons">
+                    <a href="index.html#contacto" class="btn btn--primary btn--large">
+                        <i class="fas fa-calendar-check"></i>
+                        Solicitar Demo del Software
+                    </a>
+                    <a href="index.html" class="btn btn--secondary btn--large">
+                        <i class="fas fa-arrow-left"></i>
+                        Volver al Inicio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="../alertaescolar/images/alertaescolar_logo.png" alt="Alerta Escolar"
+                            class="footer-logo-img">
+                        <span class="footer-logo-text">Alerta Escolar</span>
+                    </div>
+                    <p class="footer-description">
+                        Software líder en control de asistencia escolar
+                    </p>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Kit Completo</h4>
+                    <ul class="footer-links">
+                        <li><a href="sistema-control-asistencia-escolar.html">Software</a></li>
+                        <li><a href="hardware-control-asistencia.html">Hardware</a></li>
+                        <li><a href="credenciales-pvc.html">Credenciales PVC</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Soporte</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Centro de Ayuda</a></li>
+                        <li><a href="#">Contacto</a></li>
+                        <li><a href="#">Términos de Servicio</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Alerta Escolar. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+
+</html>
