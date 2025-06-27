@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Administrativo | Alerta Escolar</title>
+    <title>Panel Administrativo | Alerta Escolar - Sistema de Gestión Escolar Integral</title>
     <meta name="description"
-        content="Panel de control administrativo completo para gestión escolar. Dashboard, reportes, comunicados y control total del sistema de asistencia.">
+        content="Panel de control administrativo completo para gestión escolar integral. Dashboard en tiempo real, control de asistencia, comunicados masivos y gestión estudiantil centralizada.">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
@@ -17,682 +17,820 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="additional-styles.css">
-
-    <style>
-        /* Admin Panel Specific Styles */
-        .admin-hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 120px 0 80px;
-            text-align: center;
-        }
-
-        .admin-hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            line-height: 1.2;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        .admin-hero p {
-            font-size: 1.3rem;
-            opacity: 0.95;
-            max-width: 800px;
-            margin: 0 auto 40px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            font-weight: 500;
-        }
-
-        .admin-badges {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
-
-        .admin-badge {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 15px 25px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .admin-badge:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-2px);
-        }
-
-        .admin-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-            margin: 80px 0;
-        }
-
-        .admin-feature {
-            background: white;
-            padding: 50px 40px;
-            border-radius: 24px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .admin-feature:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
-        }
-
-        .admin-feature::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .admin-feature:hover::before {
-            opacity: 1;
-        }
-
-        .admin-icon {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 30px;
-            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .admin-feature:hover .admin-icon {
-            transform: scale(1.05);
-            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
-        }
-
-        .admin-icon i {
-            font-size: 2.5rem;
-            color: white;
-        }
-
-        .admin-feature h3 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-
-        .admin-feature p {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 25px;
-            font-size: 1.1rem;
-        }
-
-        .admin-feature-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .admin-feature-list li {
-            padding: 12px 0;
-            color: var(--text-secondary);
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .admin-feature-list li:last-child {
-            border-bottom: none;
-        }
-
-        .admin-feature-list li::before {
-            content: '⚙️';
-            font-size: 1.2rem;
-            width: 20px;
-            text-align: center;
-        }
-
-        .dashboard-section {
-            background: linear-gradient(135deg, #f8fafc 0%, white 100%);
-            padding: 100px 0;
-        }
-
-        .dashboard-preview {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-            margin-top: 60px;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 30px;
-            border-radius: 16px;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        .back-button {
-            position: fixed;
-            top: 100px;
-            left: 30px;
-            background: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            text-decoration: none;
-            color: var(--text-primary);
-            transition: all 0.3s ease;
-            z-index: 100;
-        }
-
-        .back-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Dashboard Main Image */
-        .dashboard-preview-hero {
-            margin-top: 60px;
-            text-align: center;
-        }
-
-        .dashboard-main-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Components Section Styles */
-        .admin-components {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #f8fafc 0%, white 100%);
-        }
-
-        .admin-components h2 {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            text-align: center;
-            margin-bottom: 80px;
-            line-height: 1.2;
-        }
-
-        .component-row {
-            display: flex;
-            align-items: center;
-            margin-bottom: 120px;
-            gap: 80px;
-        }
-
-        .component-row.reverse {
-            flex-direction: row-reverse;
-        }
-
-        .component-content {
-            display: flex;
-            align-items: center;
-            gap: 80px;
-            width: 100%;
-        }
-
-        .component-info {
-            flex: 1;
-            max-width: 600px;
-        }
-
-        .component-info h3 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            margin-bottom: 15px;
-            line-height: 1.2;
-        }
-
-        .component-info h4 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #667eea;
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-
-        .component-info p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        .feature-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .feature-list li {
-            padding: 12px 0;
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-        }
-
-        .feature-list li:last-child {
-            border-bottom: none;
-        }
-
-        .feature-list li i {
-            color: #28a745;
-            font-size: 1rem;
-        }
-
-        .component-mockup {
-            flex: 1;
-            text-align: center;
-        }
-
-        .component-mockup img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 16px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
-            transition: all 0.3s ease;
-        }
-
-        .component-mockup img:hover {
-            transform: scale(1.02);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-        }
-
-        @media (max-width: 768px) {
-            .admin-hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .admin-hero p {
-                font-size: 1.1rem;
-            }
-
-            .back-button {
-                top: 80px;
-                left: 20px;
-                width: 45px;
-                height: 45px;
-            }
-
-            .admin-features {
-                grid-template-columns: 1fr;
-                gap: 25px;
-                margin: 60px 0;
-            }
-
-            .admin-feature {
-                padding: 35px 25px;
-            }
-
-            .dashboard-section {
-                padding: 80px 0;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-
-            .stat-card {
-                padding: 25px 20px;
-            }
-
-            .stat-number {
-                font-size: 2rem;
-            }
-
-            .admin-components {
-                padding: 80px 0;
-            }
-
-            .admin-components h2 {
-                font-size: 2.2rem;
-                margin-bottom: 60px;
-            }
-
-            .component-row {
-                flex-direction: column;
-                margin-bottom: 80px;
-                gap: 40px;
-            }
-
-            .component-row.reverse {
-                flex-direction: column;
-            }
-
-            .component-content {
-                flex-direction: column;
-                gap: 40px;
-            }
-
-            .component-info h3 {
-                font-size: 2rem;
-            }
-
-            .component-info h4 {
-                font-size: 1.1rem;
-            }
-
-            .component-info p {
-                font-size: 1.1rem;
-            }
-
-            .feature-list li {
-                font-size: 1rem;
-            }
-
-            .dashboard-main-image {
-                margin-top: 40px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="panel-administrativo-styles.css">
 </head>
 
 <body>
-    <!-- Back Button -->
-    <a href="sistema-control-asistencia-escolar.html" class="back-button" title="Volver al software">
-        <i class="fas fa-arrow-left"></i>
-    </a>
+    <!-- Modern Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <img src="images/alertaescolar_logo.png" alt="Alerta Escolar" class="navbar-logo">
+                <span class="navbar-title">Alerta Escolar</span>
+            </div>
+            <div class="navbar-menu">
+                <a href="index.html" class="navbar-item">
+                    <i class="fas fa-home"></i>
+                    <span>Inicio</span>
+                </a>
+                <a href="panel-administrativo.html" class="navbar-item active">
+                    <i class="fas fa-cogs"></i>
+                    <span>Interfaz Administrativa</span>
+                </a>
+                <a href="app-padres.html" class="navbar-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Interfaz para Padres</span>
+                </a>
+            </div>
+            <div class="navbar-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
     <section class="admin-hero">
         <div class="container">
-            <h1>Dashboard Completo de Control Escolar</h1>
-            <p>Plataforma administrativa integral con cuenta centralizada para gestionar asistencia, comunicados,
-                horarios y directorio estudiantil en tiempo real</p>
+            <h1>Panel de Control Administrativo Integral</h1>
+            <p class="hero-description">Descubre cómo nuestro sistema revoluciona la gestión escolar con interfaces
+                intuitivas, automatización inteligente y control total en tiempo real</p>
 
             <div class="admin-badges">
                 <div class="admin-badge">
                     <i class="fas fa-tachometer-alt"></i>
-                    Dashboard Centralizado
+                    Dashboard en Tiempo Real
                 </div>
                 <div class="admin-badge">
                     <i class="fas fa-users-cog"></i>
-                    Gestión Integral
-                </div>
-                <div class="admin-badge">
-                    <i class="fas fa-clock"></i>
-                    Tiempo Real
+                    Gestión Centralizada
                 </div>
                 <div class="admin-badge">
                     <i class="fas fa-shield-alt"></i>
                     Control Total
                 </div>
+                <div class="admin-badge">
+                    <i class="fas fa-chart-line"></i>
+                    Análisis Avanzado
+                </div>
             </div>
 
-            <div class="dashboard-preview-hero">
-                <img src="images/admin_dashboard.png" alt="Dashboard Completo de Control Escolar"
-                    class="dashboard-main-image">
+            <div class="hero-cta">
+                <a href="#dashboard-showcase" class="btn-hero">
+                    <i class="fas fa-play"></i>
+                    Ver Interfaces en Acción
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Components Section -->
-    <section class="admin-components">
+    <!-- Dashboard Showcase Section -->
+    <section id="dashboard-showcase" class="dashboard-showcase">
         <div class="container">
-            <h2>Componentes del Sistema Administrativo</h2>
-
-            <!-- Directorio de Estudiantes -->
-            <div class="component-row">
-                <div class="component-content">
-                    <div class="component-info">
-                        <h3>Directorio de Estudiantes</h3>
-                        <h4>Base de datos de estudiantes con filtros avanzados</h4>
-                        <p>Gestión completa de información estudiantil, contactos de emergencia y datos académicos</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i>Registro completo de datos estudiantiles</li>
-                            <li><i class="fas fa-check"></i>Contactos de emergencia actualizados</li>
-                            <li><i class="fas fa-check"></i>Filtros avanzados por grado, sección, estatus</li>
-                            <li><i class="fas fa-check"></i>Historial académico y disciplinario</li>
-                            <li><i class="fas fa-check"></i>Exportación de reportes y listas</li>
-                            <li><i class="fas fa-check"></i>Fotografías y documentos adjuntos</li>
-                            <li><i class="fas fa-check"></i>Generación automática de códigos QR</li>
-                        </ul>
-                    </div>
-                    <div class="component-mockup">
-                        <img src="images/dir_estudiantes/filtro.png" alt="Directorio de Estudiantes">
-                    </div>
-                </div>
+            <div class="showcase-header">
+                <span class="showcase-tag">📊 DASHBOARD PRINCIPAL</span>
+                <h2>Centro de Comando Escolar</h2>
+                <p>Tu centro de control principal donde visualizas métricas clave, tendencias de asistencia y alertas
+                    importantes en una sola pantalla</p>
             </div>
 
-            <!-- Comunicados y Notificaciones -->
-            <div class="component-row reverse">
-                <div class="component-content">
-                    <div class="component-info">
-                        <h3>Comunicados y Notificaciones</h3>
-                        <h4>Panel de tipos de mensajes y comunicados</h4>
-                        <p>Envío masivo de comunicados, notificaciones push y mensajes dirigidos a padres de familia</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i>Diferentes tipos de mensajes (urgente, informativo,
-                                recordatorio)</li>
-                            <li><i class="fas fa-check"></i>Envío masivo a grupos específicos</li>
-                            <li><i class="fas fa-check"></i>Notificaciones push instantáneas</li>
-                            <li><i class="fas fa-check"></i>Programación de envíos automáticos</li>
-                            <li><i class="fas fa-check"></i>Confirmación de lectura</li>
-                            <li><i class="fas fa-check"></i>Plantillas predefinidas reutilizables</li>
-                            <li><i class="fas fa-check"></i>Historial completo de comunicados</li>
-                        </ul>
+            <div class="interface-demo">
+                <div class="demo-content">
+                    <div class="demo-info">
+                        <h3>Vista Principal del Administrador</h3>
+                        <div class="use-case">
+                            <h4>📈 Caso de Uso: Monitoreo Matutino</h4>
+                            <p>Son las 8:00 AM y como director necesitas una visión completa del estado de tu escuela:
+                            </p>
+                            <ul class="scenario-list">
+                                <li>
+                                    <span class="scenario-icon">👥</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Gestión centralizada</div>
+                                        <div class="scenario-description">de toda la información estudiantil</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">✅</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Control de asistencia</div>
+                                        <div class="scenario-description">en tiempo real con alertas automáticas</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">📢</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Centro de comunicaciones</div>
+                                        <div class="scenario-description">para envío masivo de mensajes</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">📅</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Gestión de horarios</div>
+                                        <div class="scenario-description">y eventos especiales</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">⚙️</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Configuración institucional</div>
+                                        <div class="scenario-description">personalizada</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="key-benefits">
+                            <div class="benefit-item">
+                                <i class="fas fa-bolt"></i>
+                                <span>Acceso inmediato a todas las funciones principales</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-eye"></i>
+                                <span>Vista unificada de toda la información crítica</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Navegación intuitiva entre módulos del sistema</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="component-mockup">
-                        <img src="images/comunicados/tipo_mensaje.png" alt="Comunicados y Notificaciones">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Control de Asistencia -->
-            <div class="component-row">
-                <div class="component-content">
-                    <div class="component-info">
-                        <h3>Control de Asistencia</h3>
-                        <h4>Control de asistencia con filtros en tiempo real</h4>
-                        <p>Monitoreo en vivo de entradas y salidas con alertas automáticas de ausencias</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i>Monitoreo en tiempo real</li>
-                            <li><i class="fas fa-check"></i>Alertas automáticas de ausencias</li>
-                            <li><i class="fas fa-check"></i>Filtros por fecha, grado, estudiante</li>
-                            <li><i class="fas fa-check"></i>Reportes de puntualidad</li>
-                            <li><i class="fas fa-check"></i>Estadísticas de asistencia</li>
-                            <li><i class="fas fa-check"></i>Gráficos de tendencias</li>
-                            <li><i class="fas fa-check"></i>Notificaciones automáticas a padres</li>
-                        </ul>
-                    </div>
-                    <div class="component-mockup">
-                        <img src="images/control_asistencia/filtrado.png" alt="Control de Asistencia">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Gestión de Horarios -->
-            <div class="component-row reverse">
-                <div class="component-content">
-                    <div class="component-info">
-                        <h3>Gestión de Horarios</h3>
-                        <h4>Configuración y gestión de horarios escolares</h4>
-                        <p>Configuración de horarios escolares, eventos especiales y calendarios académicos</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i>Creación de horarios por grado y sección</li>
-                            <li><i class="fas fa-check"></i>Gestión de eventos especiales</li>
-                            <li><i class="fas fa-check"></i>Calendarios académicos</li>
-                            <li><i class="fas fa-check"></i>Sincronización automática</li>
-                            <li><i class="fas fa-check"></i>Notificación de cambios</li>
-                            <li><i class="fas fa-check"></i>Horarios variables por día</li>
-                            <li><i class="fas fa-check"></i>Configuración de días no laborales</li>
-                        </ul>
-                    </div>
-                    <div class="component-mockup">
-                        <img src="images/horarios/gestion_horarios.png" alt="Gestión de Horarios">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Configuración Escolar -->
-            <div class="component-row">
-                <div class="component-content">
-                    <div class="component-info">
-                        <h3>Configuración Escolar</h3>
-                        <h4>Panel de configuración de la escuela</h4>
-                        <p>Personalización completa: logos, colores institucionales, información de contacto y políticas
-                        </p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i>Personalización de logos y colores</li>
-                            <li><i class="fas fa-check"></i>Información institucional</li>
-                            <li><i class="fas fa-check"></i>Configuración de políticas</li>
-                            <li><i class="fas fa-check"></i>Datos de contacto</li>
-                            <li><i class="fas fa-check"></i>Configuración de usuarios</li>
-                            <li><i class="fas fa-check"></i>Roles y permisos</li>
-                            <li><i class="fas fa-check"></i>Respaldo de configuración</li>
-                        </ul>
-                    </div>
-                    <div class="component-mockup">
-                        <img src="images/configuracion_escolar/config.png" alt="Configuración Escolar">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Escáner QR Centralizado -->
-            <div class="component-row reverse">
-                <div class="component-content">
-                    <div class="component-info">
-                        <h3>Escáner QR Centralizado</h3>
-                        <h4>Interfaz centralizada del escáner QR</h4>
-                        <p>Control del sistema de escaneo con tablet centralizada y monitoreo de actividad en tiempo
-                            real</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i>Interfaz centralizada para tablet</li>
-                            <li><i class="fas fa-check"></i>Monitoreo de actividad en tiempo real</li>
-                            <li><i class="fas fa-check"></i>Control de múltiples puntos de acceso</li>
-                            <li><i class="fas fa-check"></i>Alertas de intentos no autorizados</li>
-                            <li><i class="fas fa-check"></i>Log completo de actividad</li>
-                            <li><i class="fas fa-check"></i>Estadísticas de uso del escáner</li>
-                            <li><i class="fas fa-check"></i>Configuración de horarios de operación</li>
-                        </ul>
-                    </div>
-                    <div class="component-mockup">
-                        <img src="images/escaner_qr.png" alt="Escáner QR Centralizado">
+                    <div class="demo-interface">
+                        <div class="interface-display">
+                            <div class="real-interface-image">
+                                <img src="images/vista_principal.png"
+                                    alt="Dashboard Principal - Vista del Administrador" class="interface-screenshot">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Dashboard Preview -->
-    <section class="dashboard-section">
+    <!-- Student Management Showcase -->
+    <section class="student-management-showcase alternate-layout">
         <div class="container">
-            <div class="section__header">
-                <span class="section__tag">📊 VISTA PREVIA DEL DASHBOARD</span>
-                <h2 class="section__title">Información Centralizada y Clara</h2>
-                <p class="section__description">
-                    Ejemplo de las métricas y estadísticas que verás en el panel administrativo
-                </p>
+            <div class="showcase-header fade-in-up">
+                <span class="showcase-tag">👥 GESTIÓN DE ESTUDIANTES</span>
+                <h2>Directorio Inteligente y Búsqueda Avanzada</h2>
+                <p>Administra toda la información estudiantil con herramientas de búsqueda potentes y acceso instantáneo
+                    a datos críticos</p>
             </div>
 
-            <div class="dashboard-preview">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <span class="stat-number">1,247</span>
-                        <span class="stat-label">Estudiantes Activos</span>
+            <div class="interface-demo reverse slide-in-left">
+                <div class="demo-content">
+                    <div class="demo-interface">
+                        <div class="interface-display">
+                            <div class="real-interface-image">
+                                <img src="images/dir_estudiantes/filtro.png" alt="Directorio de Estudiantes - Filtros"
+                                    class="interface-screenshot">
+                            </div>
+                        </div>
                     </div>
-                    <div class="stat-card">
-                        <span class="stat-number">98.2%</span>
-                        <span class="stat-label">Asistencia Promedio</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number">892</span>
-                        <span class="stat-label">Familias Registradas</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number">15,340</span>
-                        <span class="stat-label">Registros Este Mes</span>
+                    <div class="demo-info">
+                        <h3>Búsqueda y Gestión Inteligente</h3>
+                        <div class="use-case">
+                            <h4>🎯 Caso de Uso: Seguimiento de Ausencias</h4>
+                            <p>Es martes por la mañana y necesitas contactar a los padres de Juan Carlos Mendoza por su
+                                ausencia:</p>
+                            <ul class="scenario-list">
+                                <li>
+                                    <span class="scenario-icon">🔍</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Búsqueda instantánea</div>
+                                        <div class="scenario-description">por nombre, ID o información del tutor</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">📊</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Estado visual</div>
+                                        <div class="scenario-description">presente/ausente con porcentaje de asistencia
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">📱</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Contactos inmediatos</div>
+                                        <div class="scenario-description">un clic para llamar o enviar mensaje</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">📋</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Historial completo</div>
+                                        <div class="scenario-description">patrones de asistencia y notas anteriores
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">⚡</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Acción rápida</div>
+                                        <div class="scenario-description">notificación automática a los padres</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="key-benefits">
+                            <div class="benefit-item">
+                                <i class="fas fa-search"></i>
+                                <span>Filtros inteligentes por grado, sección y estado</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-phone"></i>
+                                <span>Contacto directo con un solo clic</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-history"></i>
+                                <span>Historial completo y patrones de comportamiento</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <div style="text-align: center; padding: 40px; background: #f8fafc; border-radius: 16px;">
-                    <h3 style="margin-bottom: 20px; color: var(--text-primary);">🚀 ¿Listo para Implementar?</h3>
-                    <p style="margin-bottom: 30px; color: var(--text-secondary);">Solicita una demostración
-                        personalizada del panel administrativo</p>
-                    <a href="../index.html#pricing" class="btn btn--primary"
-                        style="padding: 18px 35px; font-size: 1.1rem; background: linear-gradient(135deg, #667eea, #764ba2); border: none;">
-                        <i class="fas fa-desktop" style="margin-right: 10px;"></i>
-                        Solicitar Demo del Panel
+    <!-- Communications Center Showcase -->
+    <section class="communications-showcase diagonal-layout">
+        <div class="container">
+            <div class="showcase-header fade-in-right">
+                <span class="showcase-tag">📢 CENTRO DE COMUNICACIONES</span>
+                <h2>Comunicación Masiva e Instantánea</h2>
+                <p>Envía comunicados importantes, alertas de emergencia y notificaciones programadas a toda la comunidad
+                    escolar</p>
+            </div>
+
+            <div class="interface-demo slide-in-right">
+                <div class="demo-content">
+                    <div class="demo-info">
+                        <h3>Comunicados Inteligentes y Segmentados</h3>
+                        <div class="use-case">
+                            <h4>🌧️ Caso de Uso: Alerta Meteorológica</h4>
+                            <p>Se aproxima una tormenta fuerte y necesitas informar a todas las familias sobre el cambio
+                                de horario:</p>
+                            <ul class="scenario-list">
+                                <li>
+                                    <span class="scenario-icon">⚡</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Mensaje urgente</div>
+                                        <div class="scenario-description">con prioridad alta para máxima visibilidad
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">🎯</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Segmentación automática</div>
+                                        <div class="scenario-description">todos los grados y secciones</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">📱</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Múltiples canales</div>
+                                        <div class="scenario-description">push, SMS y email simultáneos</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">✅</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Confirmación de lectura</div>
+                                        <div class="scenario-description">sabes quién recibió el mensaje</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">🔄</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Reenvío automático</div>
+                                        <div class="scenario-description">a quienes no han leído en 30 min</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="key-benefits">
+                            <div class="benefit-item">
+                                <i class="fas fa-rocket"></i>
+                                <span>Envío instantáneo a miles de familias</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-target"></i>
+                                <span>Segmentación por grado, sección o grupo</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-check-double"></i>
+                                <span>Confirmación de entrega y lectura</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="demo-interface">
+                        <div class="interface-display">
+                            <div class="real-interface-image">
+                                <img src="images/comunicados/tipo_mensaje.png"
+                                    alt="Centro de Comunicaciones - Tipos de Mensaje" class="interface-screenshot">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Attendance Control Showcase -->
+    <section class="attendance-showcase zigzag-layout">
+        <div class="container">
+            <div class="showcase-header fade-in-up">
+                <span class="showcase-tag">✅ CONTROL DE ASISTENCIA</span>
+                <h2>Monitoreo en Tiempo Real</h2>
+                <p>Visualiza patrones de asistencia, identifica tendencias y genera alertas automáticas para
+                    intervención temprana</p>
+            </div>
+
+            <div class="interface-demo reverse slide-in-bounce">
+                <div class="demo-content">
+                    <div class="demo-interface">
+                        <div class="interface-display">
+                            <div class="real-interface-image">
+                                <img src="images/control_asistencia/filtrado.png" alt="Control de Asistencia - Filtrado"
+                                    class="interface-screenshot">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="demo-info">
+                        <h3>Inteligencia Predictiva y Alertas</h3>
+                        <div class="use-case">
+                            <h4>🎯 Caso de Uso: Intervención Temprana</h4>
+                            <p>El sistema detecta automáticamente patrones preocupantes y te alerta para actuar:</p>
+                            <ul class="scenario-list">
+                                <li>
+                                    <span class="scenario-icon">🤖</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Detección automática</div>
+                                        <div class="scenario-description">de ausencias prolongadas o patrones
+                                            irregulares</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">📊</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Análisis de tendencias</div>
+                                        <div class="scenario-description">identifica estudiantes en riesgo antes de que
+                                            sea tarde</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">🚨</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Alertas prioritarias</div>
+                                        <div class="scenario-description">casos críticos destacados para acción
+                                            inmediata</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">📱</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Contacto directo</div>
+                                        <div class="scenario-description">botones de acción para llamar o programar
+                                            reuniones</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">📈</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Visualización clara</div>
+                                        <div class="scenario-description">gráficos que muestran tendencias semanales
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="key-benefits">
+                            <div class="benefit-item">
+                                <i class="fas fa-brain"></i>
+                                <span>Inteligencia artificial para detección temprana</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-bell"></i>
+                                <span>Alertas automáticas por patrones anómalos</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Visualización de tendencias y métricas clave</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Management Showcase -->
+    <section class="schedule-showcase curved-layout">
+        <div class="container">
+            <div class="showcase-header fade-in-left">
+                <span class="showcase-tag">📅 GESTIÓN DE HORARIOS</span>
+                <h2>Planificación Académica Inteligente</h2>
+                <p>Configura horarios escolares, eventos especiales y calendarios académicos con sincronización
+                    automática</p>
+            </div>
+
+            <div class="interface-demo scale-in">
+                <div class="demo-content">
+                    <div class="demo-info">
+                        <h3>Organización Temporal Completa</h3>
+                        <div class="use-case">
+                            <h4>📚 Caso de Uso: Configuración de Nuevo Período</h4>
+                            <p>Inicio del nuevo año escolar y necesitas configurar todos los horarios académicos:</p>
+                            <ul class="scenario-list">
+                                <li>
+                                    <span class="scenario-icon">🏫</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Horarios por grado</div>
+                                        <div class="scenario-description">configuración específica para cada nivel
+                                            educativo</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">📋</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Materias y docentes</div>
+                                        <div class="scenario-description">asignación automática de recursos</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">⏰</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Franjas horarias</div>
+                                        <div class="scenario-description">bloques de tiempo personalizables</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">📱</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Sincronización automática</div>
+                                        <div class="scenario-description">actualización en todas las apps</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">📅</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Eventos especiales</div>
+                                        <div class="scenario-description">días festivos y actividades</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="key-benefits">
+                            <div class="benefit-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>Gestión completa de calendarios académicos</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-sync"></i>
+                                <span>Sincronización automática con todas las apps</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-bell"></i>
+                                <span>Notificaciones de cambios en tiempo real</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="demo-interface">
+                        <div class="interface-display">
+                            <div class="real-interface-image">
+                                <img src="images/horarios/gestion_horarios.png" alt="Gestión de Horarios"
+                                    class="interface-screenshot">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- School Configuration Showcase -->
+    <section class="config-showcase floating-layout">
+        <div class="container">
+            <div class="showcase-header fade-in-right">
+                <span class="showcase-tag">⚙️ CONFIGURACIÓN ESCOLAR</span>
+                <h2>Personalización Institucional Completa</h2>
+                <p>Adapta el sistema a la identidad de tu institución con configuraciones personalizadas y gestión de
+                    usuarios</p>
+            </div>
+
+            <div class="interface-demo reverse slide-in-up">
+                <div class="demo-content">
+                    <div class="demo-interface">
+                        <div class="interface-display">
+                            <div class="real-interface-image">
+                                <img src="images/configuracion_escolar/config.png" alt="Configuración Escolar"
+                                    class="interface-screenshot">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="demo-info">
+                        <h3>Identidad y Personalización</h3>
+                        <div class="use-case">
+                            <h4>🏛️ Caso de Uso: Configuración Inicial</h4>
+                            <p>Nueva implementación del sistema y necesitas configurar la identidad institucional:</p>
+                            <ul class="scenario-list">
+                                <li>
+                                    <span class="scenario-icon">🎨</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Branding institucional</div>
+                                        <div class="scenario-description">logos, colores y tipografías personalizadas
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">📋</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Información básica</div>
+                                        <div class="scenario-description">datos de contacto y ubicación</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">👥</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Gestión de usuarios</div>
+                                        <div class="scenario-description">roles y permisos administrativos</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">📜</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Políticas institucionales</div>
+                                        <div class="scenario-description">reglas y procedimientos</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">🔒</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Configuración de seguridad</div>
+                                        <div class="scenario-description">niveles de acceso y autenticación</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="key-benefits">
+                            <div class="benefit-item">
+                                <i class="fas fa-palette"></i>
+                                <span>Personalización visual completa</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-users-cog"></i>
+                                <span>Gestión avanzada de roles y permisos</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Control total de seguridad y acceso</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QR Scanner Showcase -->
+    <section class="scanner-showcase pulse-layout">
+        <div class="container">
+            <div class="showcase-header fade-in-up">
+                <span class="showcase-tag">📱 ESCÁNER QR CENTRALIZADO</span>
+                <h2>Control de Acceso Inteligente</h2>
+                <p>Sistema de escaneo QR con reconocimiento instantáneo, validación automática y registro completo de
+                    actividad</p>
+            </div>
+
+            <div class="interface-demo rotate-in">
+                <div class="demo-content">
+                    <div class="demo-info">
+                        <h3>Acceso Seguro y Monitoreo Total</h3>
+                        <div class="use-case">
+                            <h4>🏫 Caso de Uso: Entrada Matutina</h4>
+                            <p>Son las 7:30 AM y los estudiantes están llegando. El sistema QR procesa cada entrada:</p>
+                            <ul class="scenario-list">
+                                <li>
+                                    <span class="scenario-icon">⚡</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Escaneo instantáneo</div>
+                                        <div class="scenario-description">reconocimiento en menos de 1 segundo</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">✅</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Validación automática</div>
+                                        <div class="scenario-description">verifica estudiante activo y autorizado</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">📱</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Notificación inmediata</div>
+                                        <div class="scenario-description">los padres reciben confirmación de llegada
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">🚨</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Alertas de seguridad</div>
+                                        <div class="scenario-description">códigos no válidos o estudiantes no
+                                            autorizados</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">📊</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Registro completo</div>
+                                        <div class="scenario-description">hora exacta, ubicación y foto de confirmación
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="key-benefits">
+                            <div class="benefit-item">
+                                <i class="fas fa-qrcode"></i>
+                                <span>Escaneo ultra-rápido con validación instantánea</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Seguridad máxima con alertas automáticas</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-history"></i>
+                                <span>Registro detallado de toda la actividad</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="demo-interface">
+                        <div class="interface-display">
+                            <div class="real-interface-image">
+                                <img src="images/escaner_qr.png" alt="Escáner QR Centralizado"
+                                    class="interface-screenshot">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="final-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>🚀 Transforma tu Gestión Escolar Hoy</h2>
+                <p class="cta-description">Únete a más de 500 instituciones educativas que ya revolucionaron su
+                    administración con nuestro sistema integral</p>
+                <div class="cta-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Escuelas Activas</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">98%</span>
+                        <span class="stat-label">Satisfacción</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Soporte</span>
+                    </div>
+                </div>
+                <div class="cta-buttons">
+                    <a href="index.html#pricing" class="btn-cta primary">
+                        <i class="fas fa-rocket"></i>
+                        Solicitar Demo Gratuito
+                    </a>
+                    <a href="app-padres.html" class="btn-cta secondary">
+                        <i class="fas fa-mobile-alt"></i>
+                        Ver App para Padres
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer (simplified) -->
-    <footer class="footer" style="background: var(--text-primary); color: white; padding: 40px 0; text-align: center;">
+    <!-- Footer -->
+    <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Alerta Escolar. Todos los derechos reservados.</p>
-            <p style="margin-top: 10px; opacity: 0.7;">
-                <a href="sistema-control-asistencia-escolar.html" style="color: white; text-decoration: none;">← Volver
-                    al software</a>
-            </p>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="images/alertaescolar_logo.png" alt="Alerta Escolar" class="footer-logo">
+                    <h3>Alerta Escolar</h3>
+                    <p>Revolucionando la gestión educativa con tecnología inteligente</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Plataforma</h4>
+                        <a href="index.html">Inicio</a>
+                        <a href="panel-administrativo.html">Panel Administrativo</a>
+                        <a href="app-padres.html">App para Padres</a>
+                        <a href="sistema-control-asistencia-escolar.html">Sistema Completo</a>
+                    </div>
+                    <div class="link-group">
+                        <h4>Contacto</h4>
+                        <a href="mailto:info@alertaescolar.com">📧 info@alertaescolar.com</a>
+                        <a href="tel:+1234567890">📱 +123 456 7890</a>
+                        <a href="#">💬 Chat en Vivo</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Alerta Escolar. Todos los derechos reservados.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-link">📘</a>
+                    <a href="#" class="social-link">📷</a>
+                    <a href="#" class="social-link">🐦</a>
+                </div>
+            </div>
         </div>
     </footer>
 
     <!-- Scripts -->
     <script src="script.js"></script>
+    <script>
+        // Modern navbar functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const navbarToggle = document.querySelector('.navbar-toggle');
+            const navbarMenu = document.querySelector('.navbar-menu');
+
+            if (navbarToggle && navbarMenu) {
+                navbarToggle.addEventListener('click', function () {
+                    navbarMenu.classList.toggle('active');
+                    navbarToggle.classList.toggle('active');
+                });
+            }
+
+            // Smooth scroll for internal links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Add scroll effect to navbar
+            window.addEventListener('scroll', function () {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Interface animations on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all interface demos
+            document.querySelectorAll('.interface-demo').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Scanner animation
+            const scanLine = document.querySelector('.scan-line');
+            if (scanLine) {
+                setInterval(() => {
+                    scanLine.style.animation = 'none';
+                    setTimeout(() => {
+                        scanLine.style.animation = 'scan 2s ease-in-out';
+                    }, 100);
+                }, 3000);
+            }
+
+            // Metric cards animation
+            const metricCards = document.querySelectorAll('.metric-card');
+            metricCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('animate-in');
+                }, index * 200);
+            });
+        });
+    </script>
 </body>
 
 </html>

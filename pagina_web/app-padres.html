@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App para Padres | Alerta Escolar</title>
+    <title>Interfaz para Padres de Familia | Alerta Escolar</title>
     <meta name="description"
-        content="Aplicación móvil para padres de familia. Notificaciones instantáneas, historial de asistencia y comunicación directa con la escuela.">
+        content="Interfaz móvil para padres de familia del sistema Alerta Escolar. Recibe notificaciones instantáneas, consulta historial de asistencia y mantente conectado con la educación de tus hijos.">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
@@ -16,311 +16,45 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="additional-styles.css">
-
-    <style>
-        /* Parent App Specific Styles */
-        .parent-hero {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            padding: 120px 0 80px;
-            text-align: center;
-        }
-
-        .parent-hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            line-height: 1.2;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        .parent-hero p {
-            font-size: 1.3rem;
-            opacity: 0.95;
-            max-width: 800px;
-            margin: 0 auto 40px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            font-weight: 500;
-        }
-
-        .parent-badges {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
-
-        .parent-badge {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 15px 25px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .parent-badge:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-2px);
-        }
-
-        .parent-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-            margin: 80px 0;
-        }
-
-        .parent-feature {
-            background: white;
-            padding: 50px 40px;
-            border-radius: 24px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .parent-feature:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
-        }
-
-        .parent-feature::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(135deg, #f093fb, #f5576c);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .parent-feature:hover::before {
-            opacity: 1;
-        }
-
-        .parent-icon {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, #f093fb, #f5576c);
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 30px;
-            box-shadow: 0 15px 30px rgba(240, 147, 251, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .parent-feature:hover .parent-icon {
-            transform: scale(1.05);
-            box-shadow: 0 20px 40px rgba(240, 147, 251, 0.4);
-        }
-
-        .parent-icon i {
-            font-size: 2.5rem;
-            color: white;
-        }
-
-        .parent-feature h3 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-
-        .parent-feature p {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 25px;
-            font-size: 1.1rem;
-        }
-
-        .parent-feature-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .parent-feature-list li {
-            padding: 12px 0;
-            color: var(--text-secondary);
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .parent-feature-list li:last-child {
-            border-bottom: none;
-        }
-
-        .parent-feature-list li::before {
-            content: '💖';
-            font-size: 1.2rem;
-            width: 20px;
-            text-align: center;
-        }
-
-        .download-section {
-            background: linear-gradient(135deg, #f8fafc 0%, white 100%);
-            padding: 100px 0;
-        }
-
-        .app-store-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin: 60px 0;
-        }
-
-        .store-button {
-            display: inline-block;
-            transition: transform 0.3s ease;
-        }
-
-        .store-button:hover {
-            transform: scale(1.05);
-        }
-
-        .store-button img {
-            height: 70px;
-            border-radius: 12px;
-        }
-
-        .testimonial-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
-        }
-
-        .testimonial-card {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .testimonial-author {
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .testimonial-role {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            opacity: 0.7;
-        }
-
-        .back-button {
-            position: fixed;
-            top: 100px;
-            left: 30px;
-            background: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            text-decoration: none;
-            color: var(--text-primary);
-            transition: all 0.3s ease;
-            z-index: 100;
-        }
-
-        .back-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        @media (max-width: 768px) {
-            .parent-hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .parent-hero p {
-                font-size: 1.1rem;
-            }
-
-            .back-button {
-                top: 80px;
-                left: 20px;
-                width: 45px;
-                height: 45px;
-            }
-
-            .parent-features {
-                grid-template-columns: 1fr;
-                gap: 25px;
-                margin: 60px 0;
-            }
-
-            .parent-feature {
-                padding: 35px 25px;
-            }
-
-            .download-section {
-                padding: 80px 0;
-            }
-
-            .app-store-buttons {
-                gap: 20px;
-            }
-
-            .store-button img {
-                height: 60px;
-            }
-
-            .testimonial-cards {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .testimonial-card {
-                padding: 30px 25px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="app-padres-styles.css">
 </head>
 
 <body>
-    <!-- Back Button -->
-    <a href="sistema-control-asistencia-escolar.html" class="back-button" title="Volver al software">
-        <i class="fas fa-arrow-left"></i>
-    </a>
+    <!-- Modern Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <img src="images/alertaescolar_logo.png" alt="Alerta Escolar" class="navbar-logo">
+                <span class="navbar-title">Alerta Escolar</span>
+            </div>
+            <div class="navbar-menu">
+                <a href="index.html" class="navbar-item">
+                    <i class="fas fa-home"></i>
+                    <span>Inicio</span>
+                </a>
+                <a href="panel-administrativo.html" class="navbar-item">
+                    <i class="fas fa-cogs"></i>
+                    <span>Interfaz Administrativa</span>
+                </a>
+                <a href="app-padres.html" class="navbar-item active">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Interfaz para Padres</span>
+                </a>
+            </div>
+            <div class="navbar-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
     <section class="parent-hero">
         <div class="container">
-            <h1>App para Padres</h1>
-            <p>La tranquilidad que necesitas al alcance de tu mano. Mantente conectado con la escuela de tus hijos y
-                recibe notificaciones instantáneas sobre su asistencia y actividades escolares.</p>
+            <h1>Interfaz para Padres de Familia</h1>
+            <p class="hero-description">La tranquilidad que necesitas al alcance de tu mano. Recibe notificaciones
+                instantáneas sobre la asistencia de tus hijos y mantente siempre conectado con su educación.</p>
 
             <div class="parent-badges">
                 <div class="parent-badge">
@@ -340,199 +74,628 @@
                     Múltiples Hijos
                 </div>
             </div>
+
+            <div class="hero-cta">
+                <a href="#notifications-showcase" class="btn-hero">
+                    <i class="fas fa-play"></i>
+                    Ver Funcionalidades
+                </a>
+            </div>
         </div>
     </section>
 
-    <!-- Parent Features -->
-    <section class="section">
+    <!-- Notifications Showcase Section -->
+    <section id="notifications-showcase" class="notifications-showcase">
         <div class="container">
-            <div class="section__header">
-                <span class="section__tag">📱 CARACTERÍSTICAS PARA PADRES</span>
-                <h2 class="section__title">Todo lo que Necesitas Saber de tus Hijos</h2>
-                <p class="section__description">
-                    Diseñada especialmente para mantener a los padres informados y tranquilos sobre sus hijos
+            <div class="showcase-header">
+                <span class="showcase-tag">🔔 NOTIFICACIONES INSTANTÁNEAS</span>
+                <h2>Alertas en Tiempo Real</h2>
+                <p>Recibe notificaciones inmediatas cuando tu hijo entre o salga de la escuela mediante el escaneo de su
+                    credencial QR</p>
+            </div>
+
+            <div class="interface-demo">
+                <div class="demo-content">
+                    <div class="demo-info">
+                        <h3>Sistema de Notificaciones Inteligente</h3>
+                        <div class="use-case">
+                            <h4>📱 Caso de Uso: Entrada y Salida Escolar</h4>
+                            <p>Tu hijo llega a la escuela a las 7:45 AM y escanea su credencial QR en la entrada
+                                principal:</p>
+                            <ul class="scenario-list">
+                                <li>
+                                    <span class="scenario-icon">⚡</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Notificación instantánea</div>
+                                        <div class="scenario-description">de entrada con hora exacta y ubicación</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">📸</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Foto de confirmación</div>
+                                        <div class="scenario-description">del momento del escaneo para mayor seguridad
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">🏫</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Punto de control</div>
+                                        <div class="scenario-description">identificación del lugar exacto del escaneo
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">🔄</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Notificación de salida</div>
+                                        <div class="scenario-description">automática al finalizar el día escolar</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="key-benefits">
+                            <div class="benefit-item">
+                                <i class="fas fa-bolt"></i>
+                                <span>Notificaciones en menos de 3 segundos</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Confirmación visual con fotografía</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Registro preciso de horarios</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="demo-interface">
+                        <div class="interface-display">
+                            <div class="real-interface-image">
+                                <img src="images/lado_padre/notification_io.png"
+                                    alt="Notificaciones de Entrada y Salida" class="interface-screenshot">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Home View Showcase -->
+    <section class="home-showcase alternate-layout">
+        <div class="container">
+            <div class="showcase-header fade-in-up">
+                <span class="showcase-tag">🏠 VISTA PRINCIPAL</span>
+                <h2>Centro de Control Familiar</h2>
+                <p>Dashboard personalizado con acceso rápido a toda la información importante de tus hijos</p>
+            </div>
+
+            <div class="interface-demo reverse slide-in-left">
+                <div class="demo-content">
+                    <div class="demo-interface">
+                        <div class="interface-display">
+                            <div class="real-interface-image">
+                                <img src="images/lado_padre/home_view.png" alt="Vista Principal de la App"
+                                    class="interface-screenshot">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="demo-info">
+                        <h3>Dashboard Intuitivo y Personalizado</h3>
+                        <div class="use-case">
+                            <h4>📊 Caso de Uso: Revisión Matutina</h4>
+                            <p>Son las 7:00 AM y quieres verificar el estado y horarios de tus hijos antes de salir:</p>
+                            <ul class="scenario-list">
+                                <li>
+                                    <span class="scenario-icon">🔔</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Notificaciones recientes</div>
+                                        <div class="scenario-description">últimas alertas y comunicados importantes
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">👥</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Vista rápida de estudiantes</div>
+                                        <div class="scenario-description">estado actual de todos tus hijos</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">📅</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Horario del día</div>
+                                        <div class="scenario-description">clases y actividades programadas</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">⚡</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Accesos directos</div>
+                                        <div class="scenario-description">navegación rápida a funciones principales
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="key-benefits">
+                            <div class="benefit-item">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>Información centralizada en una vista</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-eye"></i>
+                                <span>Estado en tiempo real de todos los hijos</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-rocket"></i>
+                                <span>Navegación rápida e intuitiva</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Students Management Showcase -->
+    <section class="students-showcase diagonal-layout">
+        <div class="container">
+            <div class="showcase-header fade-in-right">
+                <span class="showcase-tag">👨‍👩‍👧‍👦 GESTIÓN DE ESTUDIANTES</span>
+                <h2>Administración Familiar Completa</h2>
+                <p>Gestiona la información de todos tus hijos, consulta detalles, horarios y agrega nuevos estudiantes
                 </p>
             </div>
 
-            <div class="parent-features">
-                <!-- Instant Notifications -->
-                <div class="parent-feature">
-                    <div class="parent-icon">
-                        <i class="fas fa-bell"></i>
+            <div class="interface-demo slide-in-right">
+                <div class="demo-content">
+                    <div class="demo-info">
+                        <h3>Control Total de la Información Estudiantil</h3>
+                        <div class="use-case">
+                            <h4>👥 Caso de Uso: Gestión Familiar</h4>
+                            <p>Necesitas consultar los detalles de tus hijos y agregar un nuevo estudiante al sistema:
+                            </p>
+                            <ul class="scenario-list">
+                                <li>
+                                    <span class="scenario-icon">📋</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Lista de estudiantes</div>
+                                        <div class="scenario-description">acceso rápido a todos tus hijos registrados
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">➕</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Agregar nuevo estudiante</div>
+                                        <div class="scenario-description">registro sencillo con formulario guiado</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">📊</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Detalles completos</div>
+                                        <div class="scenario-description">información académica y de asistencia</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">📅</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Horarios semanales</div>
+                                        <div class="scenario-description">calendario completo de clases y actividades
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="key-benefits">
+                            <div class="benefit-item">
+                                <i class="fas fa-users"></i>
+                                <span>Gestión centralizada de múltiples hijos</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-plus-circle"></i>
+                                <span>Registro fácil de nuevos estudiantes</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>Horarios detallados por estudiante</span>
+                            </div>
+                        </div>
                     </div>
-                    <h3>Notificaciones Instantáneas</h3>
-                    <p>Recibe alertas en tiempo real cada vez que tu hijo entre o salga de la escuela</p>
-                    <ul class="parent-feature-list">
-                        <li>Notificación de entrada a la escuela</li>
-                        <li>Alerta de salida de la institución</li>
-                        <li>Hora exacta de cada registro</li>
-                        <li>Foto del momento del escaneo</li>
-                        <li>Ubicación del punto de control</li>
-                        <li>Estado de confirmación del registro</li>
-                    </ul>
-                </div>
-
-                <!-- Attendance History -->
-                <div class="parent-feature">
-                    <div class="parent-icon">
-                        <i class="fas fa-history"></i>
+                    <div class="demo-interface">
+                        <div class="interface-display">
+                            <div class="real-interface-image">
+                                <img src="images/lado_padre/mis_estudiantes.png" alt="Gestión de Estudiantes"
+                                    class="interface-screenshot">
+                            </div>
+                        </div>
                     </div>
-                    <h3>Historial Completo</h3>
-                    <p>Acceso total al registro histórico de asistencia de tus hijos con búsqueda avanzada</p>
-                    <ul class="parent-feature-list">
-                        <li>Historial diario, semanal y mensual</li>
-                        <li>Búsqueda por fechas específicas</li>
-                        <li>Estadísticas de puntualidad</li>
-                        <li>Comparativas de períodos anteriores</li>
-                        <li>Exportación de reportes personales</li>
-                        <li>Gráficos de tendencias de asistencia</li>
-                    </ul>
-                </div>
-
-                <!-- School Communications -->
-                <div class="parent-feature">
-                    <div class="parent-icon">
-                        <i class="fas fa-comment-alt"></i>
-                    </div>
-                    <h3>Comunicados Escolares</h3>
-                    <p>Recibe comunicados oficiales de la escuela directamente en tu dispositivo móvil</p>
-                    <ul class="parent-feature-list">
-                        <li>Comunicados institucionales importantes</li>
-                        <li>Avisos de eventos y actividades</li>
-                        <li>Cambios de horario o calendario</li>
-                        <li>Recordatorios de reuniones</li>
-                        <li>Confirmación de lectura automática</li>
-                        <li>Archivo de comunicados anteriores</li>
-                    </ul>
-                </div>
-
-                <!-- Multiple Children -->
-                <div class="parent-feature">
-                    <div class="parent-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>Múltiples Hijos</h3>
-                    <p>Gestiona la información de todos tus hijos desde una sola aplicación</p>
-                    <ul class="parent-feature-list">
-                        <li>Perfiles individuales por hijo</li>
-                        <li>Cambio rápido entre perfiles</li>
-                        <li>Notificaciones diferenciadas por hijo</li>
-                        <li>Horarios personalizados por cada uno</li>
-                        <li>Estadísticas comparativas familiares</li>
-                        <li>Vista consolidada de toda la familia</li>
-                    </ul>
-                </div>
-
-                <!-- Updated Schedules -->
-                <div class="parent-feature">
-                    <div class="parent-icon">
-                        <i class="fas fa-calendar-check"></i>
-                    </div>
-                    <h3>Horarios Actualizados</h3>
-                    <p>Mantente al día con los horarios escolares y cambios automáticos del calendario</p>
-                    <ul class="parent-feature-list">
-                        <li>Horarios de clases actualizados</li>
-                        <li>Calendario escolar sincronizado</li>
-                        <li>Notificación de cambios de horario</li>
-                        <li>Eventos especiales y feriados</li>
-                        <li>Horarios de entrada y salida</li>
-                        <li>Integración con calendar personal</li>
-                    </ul>
-                </div>
-
-                <!-- Direct Contact -->
-                <div class="parent-feature">
-                    <div class="parent-icon">
-                        <i class="fas fa-phone"></i>
-                    </div>
-                    <h3>Contacto Directo</h3>
-                    <p>Comunicación directa con la escuela a través de canales oficiales integrados</p>
-                    <ul class="parent-feature-list">
-                        <li>Chat directo con administración</li>
-                        <li>Solicitud de citas y reuniones</li>
-                        <li>Reportes de incidencias</li>
-                        <li>Solicitudes de permisos especiales</li>
-                        <li>Confirmación de actividades</li>
-                        <li>Feedback y sugerencias</li>
-                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Download Section -->
-    <section class="download-section">
+    <!-- Schedule Showcase Section -->
+    <section class="students-showcase zigzag-layout">
         <div class="container">
-            <div class="section__header">
-                <span class="section__tag">📥 DESCARGA LA APP</span>
-                <h2 class="section__title">Disponible para iOS y Android</h2>
-                <p class="section__description">
-                    Descarga gratis la aplicación y mantente conectado con la educación de tus hijos
-                </p>
+            <div class="showcase-header fade-in-up">
+                <span class="showcase-tag">📅 HORARIOS COMPLETOS</span>
+                <h2>Calendario Académico Semanal</h2>
+                <p>Consulta el horario completo de clases de toda la semana para cada uno de tus hijos con información
+                    detallada de materias, profesores y aulas</p>
             </div>
 
-            <div class="app-store-buttons">
-                <a href="#" class="store-button">
-                    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-                        alt="Descargar en App Store">
-                </a>
-                <a href="#" class="store-button">
-                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/es_badge_web_generic.png"
-                        alt="Disponible en Google Play">
-                </a>
-            </div>
-
-            <div class="testimonial-cards">
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"Finalmente tengo la tranquilidad de saber exactamente cuándo mis hijos
-                        llegan y salen de la escuela. La app es muy fácil de usar."</p>
-                    <div class="testimonial-author">María González</div>
-                    <div class="testimonial-role">Madre de 2 estudiantes</div>
+            <div class="interface-demo slide-in-bounce">
+                <div class="demo-content">
+                    <div class="demo-info">
+                        <h3>Vista Completa del Horario Escolar</h3>
+                        <div class="use-case">
+                            <h4>🗓️ Caso de Uso: Planificación Semanal Familiar</h4>
+                            <p>Es domingo por la noche y quieres revisar toda la semana académica de tu hijo para
+                                planificar actividades familiares:</p>
+                            <ul class="scenario-list">
+                                <li>
+                                    <span class="scenario-icon">📚</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Materias por día</div>
+                                        <div class="scenario-description">horario completo de lunes a viernes con todas
+                                            las asignaturas</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">👨‍🏫</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Información del profesor</div>
+                                        <div class="scenario-description">nombre del docente para cada materia</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">🏫</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Ubicación del aula</div>
+                                        <div class="scenario-description">salón específico donde se imparte cada clase
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">⏰</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Horarios precisos</div>
+                                        <div class="scenario-description">hora exacta de inicio y fin de cada período
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">🎨</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Código de colores</div>
+                                        <div class="scenario-description">identificación visual por materia para fácil
+                                            lectura</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">📱</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Vista optimizada</div>
+                                        <div class="scenario-description">interfaz adaptada para dispositivos móviles
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="key-benefits">
+                            <div class="benefit-item">
+                                <i class="fas fa-calendar-week"></i>
+                                <span>Vista semanal completa y organizada</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-info-circle"></i>
+                                <span>Información detallada de cada clase</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-palette"></i>
+                                <span>Código de colores por materia</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-sync-alt"></i>
+                                <span>Actualización automática de cambios</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="demo-interface">
+                        <div class="interface-display">
+                            <div class="real-interface-image">
+                                <img src="images/lado_padre/horario_completo.png" alt="Horario Completo Semanal"
+                                    class="interface-screenshot">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"Las notificaciones instantáneas me han salvado muchas veces. Ahora sé
-                        si mi hijo llegó tarde o si salió temprano de clases."</p>
-                    <div class="testimonial-author">Carlos Rodríguez</div>
-                    <div class="testimonial-role">Padre de familia</div>
-                </div>
-
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"Poder ver el historial completo de asistencia de mis 3 hijos desde una
-                        sola app es increíble. Muy recomendada."</p>
-                    <div class="testimonial-author">Ana Martínez</div>
-                    <div class="testimonial-role">Madre de 3 estudiantes</div>
-                </div>
-            </div>
-
-            <div
-                style="text-align: center; margin-top: 60px; padding: 40px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
-                <h3 style="margin-bottom: 20px; color: var(--text-primary);">🚀 ¿Tu Escuela Aún No Tiene Este Sistema?
-                </h3>
-                <p style="margin-bottom: 30px; color: var(--text-secondary);">Habla con la administración de la escuela
-                    y recomiéndales nuestro sistema</p>
-                <a href="../index.html#pricing" class="btn btn--primary"
-                    style="padding: 18px 35px; font-size: 1.1rem; background: linear-gradient(135deg, #f093fb, #f5576c); border: none;">
-                    <i class="fas fa-school" style="margin-right: 10px;"></i>
-                    Recomendar a mi Escuela
-                </a>
             </div>
         </div>
     </section>
 
-    <!-- Footer (simplified) -->
-    <footer class="footer" style="background: var(--text-primary); color: white; padding: 40px 0; text-align: center;">
+    <!-- Family Information Showcase -->
+    <section class="family-showcase zigzag-layout">
         <div class="container">
-            <p>&copy; 2024 Alerta Escolar. Todos los derechos reservados.</p>
-            <p style="margin-top: 10px; opacity: 0.7;">
-                <a href="sistema-control-asistencia-escolar.html" style="color: white; text-decoration: none;">← Volver
-                    al software</a>
-            </p>
+            <div class="showcase-header fade-in-up">
+                <span class="showcase-tag">👨‍👩‍👧‍👦 INFORMACIÓN FAMILIAR</span>
+                <h2>Contactos y Datos Familiares</h2>
+                <p>Registra información de contacto familiar para facilitar la comunicación con la escuela en caso
+                    necesario</p>
+            </div>
+
+            <div class="interface-demo reverse slide-in-bounce">
+                <div class="demo-content">
+                    <div class="demo-interface">
+                        <div class="interface-display">
+                            <div class="real-interface-image">
+                                <img src="images/lado_padre/info_familiar.png" alt="Información Familiar"
+                                    class="interface-screenshot">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="demo-info">
+                        <h3>Red de Contactos Familiares</h3>
+                        <div class="use-case">
+                            <h4>📞 Caso de Uso: Registro de Contactos</h4>
+                            <p>La escuela necesita tener contactos adicionales para emergencias y comunicación
+                                importante:</p>
+                            <ul class="scenario-list">
+                                <li>
+                                    <span class="scenario-icon">👨‍👩‍👧‍👦</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Contactos familiares</div>
+                                        <div class="scenario-description">padres, abuelos, tíos y tutores autorizados
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">📱</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Múltiples números</div>
+                                        <div class="scenario-description">teléfono, celular y contactos de emergencia
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">🏥</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Contactos de emergencia</div>
+                                        <div class="scenario-description">personas autorizadas para casos urgentes</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">✅</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Validación escolar</div>
+                                        <div class="scenario-description">información visible para administradores</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="key-benefits">
+                            <div class="benefit-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Seguridad y comunicación mejorada</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-phone-alt"></i>
+                                <span>Múltiples canales de contacto</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-users-cog"></i>
+                                <span>Red de apoyo familiar completa</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Communications Showcase -->
+    <section class="communications-showcase curved-layout">
+        <div class="container">
+            <div class="showcase-header fade-in-left">
+                <span class="showcase-tag">📢 COMUNICADOS ESCOLARES</span>
+                <h2>Comunicación Directa con la Escuela</h2>
+                <p>Recibe comunicados personalizados y notificaciones importantes enviadas directamente por los
+                    administradores</p>
+            </div>
+
+            <div class="interface-demo scale-in">
+                <div class="demo-content">
+                    <div class="demo-info">
+                        <h3>Centro de Comunicaciones Personalizado</h3>
+                        <div class="use-case">
+                            <h4>📝 Caso de Uso: Comunicado de Excursión</h4>
+                            <p>Tu hijo participará en una excursión escolar y recibes actualizaciones en tiempo real:
+                            </p>
+                            <ul class="scenario-list">
+                                <li>
+                                    <span class="scenario-icon">📢</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Comunicado personalizado</div>
+                                        <div class="scenario-description">mensaje específico sobre la excursión</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">🚌</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Actualizaciones de viaje</div>
+                                        <div class="scenario-description">notificaciones de salida y regreso</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">📍</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Ubicación en tiempo real</div>
+                                        <div class="scenario-description">seguimiento del grupo durante la excursión
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="scenario-icon">✅</span>
+                                    <div class="scenario-content">
+                                        <div class="scenario-title">Confirmación de lectura</div>
+                                        <div class="scenario-description">la escuela sabe que recibiste el mensaje</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="key-benefits">
+                            <div class="benefit-item">
+                                <i class="fas fa-bullhorn"></i>
+                                <span>Comunicación directa y personalizada</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Actualizaciones en tiempo real</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Confirmación automática de recepción</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="demo-interface">
+                        <div class="interface-display">
+                            <div class="real-interface-image">
+                                <img src="images/lado_padre/notif_comunicado.png" alt="Comunicados Escolares"
+                                    class="interface-screenshot">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="final-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>📱 Descarga la App y Mantente Conectado</h2>
+                <p class="cta-description">Únete a miles de padres que ya disfrutan de la tranquilidad de estar siempre
+                    informados sobre sus hijos</p>
+                <div class="cta-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">10K+</span>
+                        <span class="stat-label">Padres Activos</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">99%</span>
+                        <span class="stat-label">Satisfacción</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Notificaciones</span>
+                    </div>
+                </div>
+                <div class="cta-buttons">
+                    <a href="#" class="btn-cta primary">
+                        <i class="fab fa-apple"></i>
+                        Descargar para iOS
+                    </a>
+                    <a href="#" class="btn-cta secondary">
+                        <i class="fab fa-google-play"></i>
+                        Descargar para Android
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="images/alertaescolar_logo.png" alt="Alerta Escolar" class="footer-logo">
+                    <h3>Alerta Escolar</h3>
+                    <p>Conectando familias con la educación a través de tecnología innovadora y segura.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Alerta Escolar. Todos los derechos reservados.</p>
+            </div>
         </div>
     </footer>
 
     <!-- Scripts -->
-    <script src="script.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile navbar toggle
+        const navbarToggle = document.querySelector('.navbar-toggle');
+        const navbarMenu = document.querySelector('.navbar-menu');
+
+        if (navbarToggle && navbarMenu) {
+            navbarToggle.addEventListener('click', function () {
+                navbarMenu.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.navbar-item').forEach(item => {
+                item.addEventListener('click', function () {
+                    navbarMenu.classList.remove('active');
+                });
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function (e) {
+                if (!navbarToggle.contains(e.target) && !navbarMenu.contains(e.target)) {
+                    navbarMenu.classList.remove('active');
+                }
+            });
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all interface demos
+        document.querySelectorAll('.interface-demo').forEach(demo => {
+            observer.observe(demo);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
