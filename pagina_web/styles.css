@@ -202,11 +202,15 @@ p {
     color: white !important;
     padding: 0.75rem 1.5rem;
     border-radius: var(--border-radius-small);
+    border: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .nav__cta:hover {
     background-color: var(--primary-color-dark);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .nav__toggle {
@@ -458,7 +462,7 @@ p {
 
 .section__header {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
 }
 
 .section__tag {
@@ -743,8 +747,16 @@ p {
 
 .cta-description {
     font-size: 1.25rem;
-    margin-bottom: 2.5rem;
-    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.cta-separator {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    margin: 0 auto 2.5rem;
+    border-radius: 2px;
 }
 
 .cta-buttons {
@@ -796,7 +808,7 @@ p {
 
 .footer-content {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr;
     gap: 2rem;
     margin-bottom: 2rem;
 }
@@ -811,6 +823,7 @@ p {
 .footer-logo-img {
     width: 40px;
     height: 40px;
+    filter: brightness(0) invert(1);
 }
 
 .footer-logo-text {

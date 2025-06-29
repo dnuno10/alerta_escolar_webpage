@@ -241,7 +241,7 @@
                                 <span>Filtros inteligentes por grado, sección y estado</span>
                             </div>
                             <div class="benefit-item">
-                                <i class="fas fa-phone"></i>
+                                <i class="fab fa-whatsapp"></i>
                                 <span>Contacto directo con un solo clic</span>
                             </div>
                             <div class="benefit-item">
@@ -691,10 +691,6 @@
                     administración con nuestro sistema integral</p>
                 <div class="cta-stats">
                     <div class="stat-item">
-                        <span class="stat-number">500+</span>
-                        <span class="stat-label">Escuelas Activas</span>
-                    </div>
-                    <div class="stat-item">
                         <span class="stat-number">98%</span>
                         <span class="stat-label">Satisfacción</span>
                     </div>
@@ -704,10 +700,10 @@
                     </div>
                 </div>
                 <div class="cta-buttons">
-                    <a href="index.html#pricing" class="btn-cta primary">
+                    <button class="btn-cta primary" onclick="openPricingForm()">
                         <i class="fas fa-rocket"></i>
                         Solicitar Demo Gratuito
-                    </a>
+                    </button>
                     <a href="app-padres.html" class="btn-cta secondary">
                         <i class="fas fa-mobile-alt"></i>
                         Ver App para Padres
@@ -721,39 +717,43 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-brand">
-                    <img src="images/alertaescolar_logo.png" alt="Alerta Escolar" class="footer-logo">
-                    <h3>Alerta Escolar</h3>
-                    <p>Revolucionando la gestión educativa con tecnología inteligente</p>
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="images/alertaescolar_logo.png" alt="Alerta Escolar" class="footer-logo-img">
+                        <span class="footer-logo-text">Alerta Escolar</span>
+                    </div>
+                    <p class="footer-description">
+                        Software líder en control de asistencia escolar
+                    </p>
                 </div>
-                <div class="footer-links">
-                    <div class="link-group">
-                        <h4>Plataforma</h4>
-                        <a href="index.html">Inicio</a>
-                        <a href="panel-administrativo.html">Panel Administrativo</a>
-                        <a href="app-padres.html">App para Padres</a>
-                        <a href="sistema-control-asistencia-escolar.html">Sistema Completo</a>
-                    </div>
-                    <div class="link-group">
-                        <h4>Contacto</h4>
-                        <a href="mailto:info@alertaescolar.com">📧 info@alertaescolar.com</a>
-                        <a href="tel:+1234567890">📱 +123 456 7890</a>
-                        <a href="#">💬 Chat en Vivo</a>
-                    </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Kit Completo</h4>
+                    <ul class="footer-links">
+                        <li><a href="sistema-control-asistencia-escolar.html">Software</a></li>
+                        <li><a href="hardware-control-asistencia.html">Hardware</a></li>
+                        <li><a href="credenciales-pvc.html">Credenciales PVC</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Soporte</h4>
+                    <ul class="footer-links">
+                        <li><a href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
+                        <li><a href="terminos-servicio.html">Términos de Servicio</a></li>
+                        <li><a href="politicas-privacidad.html">Política de Privacidad</a></li>
+                    </ul>
                 </div>
             </div>
+
             <div class="footer-bottom">
                 <p>&copy; 2024 Alerta Escolar. Todos los derechos reservados.</p>
-                <div class="footer-social">
-                    <a href="#" class="social-link">📘</a>
-                    <a href="#" class="social-link">📷</a>
-                    <a href="#" class="social-link">🐦</a>
-                </div>
             </div>
         </div>
     </footer>
 
     <!-- Scripts -->
+    <script src="supabase-config.js"></script>
     <script src="script.js"></script>
     <script>
         // Modern navbar functionality
@@ -830,7 +830,129 @@
                 }, index * 200);
             });
         });
+
+        // === MODAL FUNCTIONALITY ===
+        function openPricingForm() {
+            const modal = document.getElementById('pricing-modal');
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePricingForm() {
+            const modal = document.getElementById('pricing-modal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Handle form submission
+        function handlePricingFormSubmit(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+
+            console.log('Form data:', data);
+
+            // Show success message
+            alert('¡Gracias por tu interés! Te contactaremos pronto.');
+            closePricingForm();
+
+            // Reset form
+            event.target.reset();
+        }
+
+        // Close modal when clicking outside
+        function handleModalClick(event) {
+            const modal = document.getElementById('pricing-modal');
+            if (event.target === modal) {
+                closePricingForm();
+            }
+        }
     </script>
+
+    <!-- Contact Form Modal (idéntico al de index.html) -->
+    <div class="modal" id="pricing-modal" onclick="handleModalClick(event)">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Solicitar Información y Contacto</h3>
+                <span class="modal-close" onclick="closePricingForm()">&times;</span>
+            </div>
+            <form class="pricing-form" id="pricing-form" onsubmit="handlePricingFormSubmit(event)">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="tipo-solicitud">Tipo de Solicitud *</label>
+                        <select id="tipo-solicitud" name="tipo-solicitud" required>
+                            <option value="demo-gratuito">Demo Gratuito</option>
+                            <option value="cotizacion-personalizada">Cotización Personalizada</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">WhatsApp</label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="Ej: +52-664-529-0620 (opcional)">
+                    </div>
+                    <div class="form-group">
+                        <label for="institucion">Nombre de la Institución *</label>
+                        <input type="text" id="institucion" name="institucion" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo-institucion">Tipo de Institución *</label>
+                        <select id="tipo-institucion" name="tipo-institucion" required>
+                            <option value="">Seleccionar tipo</option>
+                            <option value="escuela-privada">Escuela Privada</option>
+                            <option value="organizacion-gubernamental">Organización Gubernamental</option>
+                            <option value="jardin-infantes">Jardín de Infantes</option>
+                            <option value="primaria">Primaria</option>
+                            <option value="secundaria">Secundaria</option>
+                            <option value="preparatoria">Preparatoria</option>
+                            <option value="universidad">Universidad</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="cantidad-alumnos">Cantidad de Alumnos (Aproximado) *</label>
+                        <select id="cantidad-alumnos" name="cantidad-alumnos" required>
+                            <option value="">Seleccionar rango</option>
+                            <option value="50-100">50 - 100 estudiantes</option>
+                            <option value="101-300">101 - 300 estudiantes</option>
+                            <option value="301-500">301 - 500 estudiantes</option>
+                            <option value="501-1000">501 - 1,000 estudiantes</option>
+                            <option value="1001-2000">1,001 - 2,000 estudiantes</option>
+                            <option value="2001-5000">2,001 - 5,000 estudiantes</option>
+                            <option value="5000+">Más de 5,000 estudiantes</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="responsable">Responsable / Cargo *</label>
+                        <input type="text" id="responsable" name="responsable" required
+                            placeholder="Ej: Juan Pérez - Director">
+                    </div>
+                    <div class="form-group form-group--full">
+                        <label for="mensaje">Mensaje Adicional</label>
+                        <textarea id="mensaje" name="mensaje" rows="4"
+                            placeholder="Cuéntanos sobre necesidades específicas de tu institución o qué te gustaría conocer..."></textarea>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn--primary">
+                        <i class="fas fa-paper-plane"></i>
+                        Enviar Solicitud
+                    </button>
+                    <button type="button" class="btn btn--secondary" onclick="closePricingForm()">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Botón flotante de WhatsApp -->
+    <a href="https://wa.me/526645290620" class="whatsapp-float" target="_blank" aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 </body>
 
 </html>

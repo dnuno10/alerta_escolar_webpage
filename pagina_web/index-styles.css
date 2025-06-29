@@ -487,9 +487,15 @@
 
 /* ===== MODERN RESULTS ===== */
 .revenue-results-modern {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.result-row-modern {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
 }
 
 .result-card-modern {
@@ -561,6 +567,12 @@
     color: #1e293b;
     margin-bottom: 0.3rem;
     line-height: 1.2;
+}
+
+.result-value-modern.large {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
 }
 
 .result-card-modern.profit .result-value-modern,
@@ -767,7 +779,6 @@
 .modal-close:hover {
     color: #ef4444;
     background: rgba(239, 68, 68, 0.1);
-    transform: rotate(90deg);
 }
 
 .pricing-form {
@@ -820,10 +831,12 @@
     transform: translateY(-1px);
 }
 
+/* Removed green border for valid fields to avoid unwanted styling
 .form-group input:valid,
 .form-group select:valid {
     border-color: #10b981;
 }
+*/
 
 .form-group textarea {
     resize: vertical;
@@ -837,6 +850,9 @@
     background-repeat: no-repeat;
     background-size: 1.5em 1.5em;
     padding-right: 2.5rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .form-actions {
@@ -1010,8 +1026,8 @@
         gap: 1.5rem;
     }
 
-    .revenue-results-modern {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    .result-row-modern {
+        grid-template-columns: 1fr;
         gap: 1.5rem;
     }
 
@@ -1093,9 +1109,13 @@
         font-size: 1.5rem;
     }
 
-    .revenue-results-modern {
+    .result-row-modern {
         grid-template-columns: 1fr;
         gap: 1rem;
+    }
+
+    .result-value-modern.large {
+        font-size: 2rem;
     }
 
     .result-card-modern {
@@ -1192,8 +1212,8 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
-    margin-top: 4rem;
-    padding-top: 2rem;
+    margin-top: 2rem;
+    padding-top: 1rem;
     position: relative;
 }
 
@@ -2034,11 +2054,24 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .nav__dropdown-toggle i {
     font-size: 0.8rem;
     transition: transform 0.3s ease;
+}
+
+.nav__dropdown-toggle:hover {
+    color: var(--accent-blue);
 }
 
 .nav__dropdown:hover .nav__dropdown-toggle i {
@@ -2096,23 +2129,62 @@
 
 /* Mobile dropdown adjustments */
 @media (max-width: 768px) {
+    .nav__dropdown {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav__dropdown-toggle {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.3s ease;
+    }
+
+    .nav__dropdown.active .nav__dropdown-toggle {
+        color: #3b82f6;
+    }
+
+    .nav__dropdown.active .nav__dropdown-toggle i {
+        transform: rotate(180deg);
+    }
+
     .nav__dropdown-menu {
         position: static;
-        opacity: 1;
-        visibility: visible;
+        opacity: 0;
+        visibility: hidden;
+        max-height: 0;
+        overflow: hidden;
         transform: none;
         box-shadow: none;
         border: none;
         background: transparent;
-        margin-left: 1rem;
+        margin: 0;
+        padding: 0;
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+
+    .nav__dropdown.active .nav__dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        max-height: 200px;
         margin-top: 0.5rem;
     }
 
     .nav__dropdown-link {
-        padding: 0.5rem 0;
+        padding: 0.75rem 0;
         margin: 0;
         color: #64748b;
         border-radius: 0;
+        display: block;
+        text-decoration: none;
+        transition: color 0.3s ease;
     }
 
     .nav__dropdown-link:hover {
@@ -2120,4 +2192,33 @@
         color: #3b82f6;
         transform: none;
     }
+}
+
+/* Botón flotante de WhatsApp */
+.whatsapp-float {
+    position: fixed;
+    right: 28px;
+    bottom: 28px;
+    z-index: 9999;
+    background: #25d366;
+    color: #fff;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 24px rgba(37, 211, 102, 0.25);
+    font-size: 2.2rem;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    text-decoration: none;
+}
+
+.whatsapp-float:hover {
+    background: #1ebe5d;
+    box-shadow: 0 8px 32px rgba(37, 211, 102, 0.35);
+    transform: scale(1.08);
 }

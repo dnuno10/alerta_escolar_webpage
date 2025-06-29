@@ -47,7 +47,7 @@
                     <a href="credenciales-pvc.html" class="nav__link">Credenciales PVC</a>
                 </li>
                 <li class="nav__item">
-                    <a href="index.html#contacto" class="nav__link nav__cta">Solicitar Demo</a>
+                    <button class="nav__link nav__cta" onclick="openPricingForm()">Solicitar Demo</button>
                 </li>
             </ul>
             <div class="nav__toggle" id="nav-toggle">
@@ -134,7 +134,7 @@
                         <li>Múltiples hijos en una cuenta</li>
                         <li>Comunicados de la escuela</li>
                         <li>Disponible en iOS y Android</li>
-                        <li>Funciona sin conexión a internet</li>
+                        <li>Seguimiento del horario de los alumnos</li>
                     </ul>
 
                     <a href="app-padres.html" class="side-btn">
@@ -170,14 +170,11 @@
                     <div class="platform-features">
                         <h4>Características iOS:</h4>
                         <ul>
-                            <li>✓ iPhone (iOS 12.0 o superior)</li>
-                            <li>✓ iPad (iPadOS 13.0 o superior)</li>
-                            <li>✓ Notificaciones push nativas</li>
-                            <li>✓ Interfaz optimizada para iOS</li>
-                            <li>✓ Integración con Siri Shortcuts</li>
-                            <li>✓ Soporte para Face ID y Touch ID</li>
-                            <li>✓ Widgets para pantalla de inicio</li>
-                            <li>✓ Modo oscuro automático</li>
+                            <li>✓ iOS 13 o superior</li>
+                            <li>✓ iPhone y iPad compatibles</li>
+                            <li>✓ Notificaciones push optimizadas</li>
+                            <li>✓ Modo oscuro adaptativo</li>
+                            <li>✓ Optimización de batería</li>
                         </ul>
                     </div>
                     <div class="download-section">
@@ -185,8 +182,7 @@
                             <img src="images/tiendas_digitales/apple.png" alt="Descargar en App Store">
                         </a>
                         <div class="rating">
-                            <span>4.9★</span>
-                            <small>(1,200+ reseñas)</small>
+                            <span>5.0★</span>
                         </div>
                     </div>
                 </div>
@@ -205,9 +201,6 @@
                             <li>✓ Android 7.0 (API nivel 24) o superior</li>
                             <li>✓ Tablets Android compatibles</li>
                             <li>✓ Notificaciones push optimizadas</li>
-                            <li>✓ Material Design 3</li>
-                            <li>✓ Soporte para biometría</li>
-                            <li>✓ Widgets personalizables</li>
                             <li>✓ Modo oscuro adaptativo</li>
                             <li>✓ Optimización de batería</li>
                         </ul>
@@ -217,8 +210,7 @@
                             <img src="images/tiendas_digitales/google.png" alt="Disponible en Google Play">
                         </a>
                         <div class="rating">
-                            <span>4.7★</span>
-                            <small>(800+ reseñas)</small>
+                            <span>5.0★</span>
                         </div>
                     </div>
                 </div>
@@ -350,10 +342,10 @@
                     Solicita una demo del software completo y descubre todas las funcionalidades
                 </p>
                 <div class="cta-buttons">
-                    <a href="index.html#contacto" class="btn btn--primary btn--large">
+                    <button class="btn btn--primary btn--large" onclick="openPricingForm()">
                         <i class="fas fa-calendar-check"></i>
                         Solicitar Demo del Software
-                    </a>
+                    </button>
                     <a href="index.html" class="btn btn--secondary btn--large">
                         <i class="fas fa-arrow-left"></i>
                         Volver al Inicio
@@ -390,9 +382,9 @@
                 <div class="footer-section">
                     <h4 class="footer-title">Soporte</h4>
                     <ul class="footer-links">
-                        <li><a href="#">Centro de Ayuda</a></li>
-                        <li><a href="#">Contacto</a></li>
-                        <li><a href="#">Términos de Servicio</a></li>
+                        <li><a href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
+                        <li><a href="terminos-servicio.html">Términos de Servicio</a></li>
+                        <li><a href="politicas-privacidad.html">Política de Privacidad</a></li>
                     </ul>
                 </div>
             </div>
@@ -404,9 +396,92 @@
     </footer>
 
     <!-- JavaScript -->
+    <script src="supabase-config.js"></script>
     <script src="script.js"></script>
 
+    <!-- Contact Form Modal (idéntico al de index.html) -->
+    <div class="modal" id="pricing-modal" onclick="handleModalClick(event)">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Solicitar Información y Contacto</h3>
+                <span class="modal-close" onclick="closePricingForm()">&times;</span>
+            </div>
+            <form class="pricing-form" id="pricing-form" onsubmit="handlePricingFormSubmit(event)">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="tipo-solicitud">Tipo de Solicitud *</label>
+                        <select id="tipo-solicitud" name="tipo-solicitud" required>
+                            <option value="demo-gratuito">Demo Gratuito</option>
+                            <option value="cotizacion-personalizada">Cotización Personalizada</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">WhatsApp</label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="Ej: +52-664-529-0620 (opcional)">
+                    </div>
+                    <div class="form-group">
+                        <label for="institucion">Nombre de la Institución *</label>
+                        <input type="text" id="institucion" name="institucion" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo-institucion">Tipo de Institución *</label>
+                        <select id="tipo-institucion" name="tipo-institucion" required>
+                            <option value="">Seleccionar tipo</option>
+                            <option value="escuela-privada">Escuela Privada</option>
+                            <option value="organizacion-gubernamental">Organización Gubernamental</option>
+                            <option value="jardin-infantes">Jardín de Infantes</option>
+                            <option value="primaria">Primaria</option>
+                            <option value="secundaria">Secundaria</option>
+                            <option value="preparatoria">Preparatoria</option>
+                            <option value="universidad">Universidad</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="cantidad-alumnos">Cantidad de Alumnos (Aproximado) *</label>
+                        <select id="cantidad-alumnos" name="cantidad-alumnos" required>
+                            <option value="">Seleccionar rango</option>
+                            <option value="50-100">50 - 100 estudiantes</option>
+                            <option value="101-300">101 - 300 estudiantes</option>
+                            <option value="301-500">301 - 500 estudiantes</option>
+                            <option value="501-1000">501 - 1,000 estudiantes</option>
+                            <option value="1001-2000">1,001 - 2,000 estudiantes</option>
+                            <option value="2001-5000">2,001 - 5,000 estudiantes</option>
+                            <option value="5000+">Más de 5,000 estudiantes</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="responsable">Responsable / Cargo *</label>
+                        <input type="text" id="responsable" name="responsable" required
+                            placeholder="Ej: Juan Pérez - Director">
+                    </div>
+                    <div class="form-group form-group--full">
+                        <label for="mensaje">Mensaje Adicional</label>
+                        <textarea id="mensaje" name="mensaje" rows="4"
+                            placeholder="Cuéntanos sobre necesidades específicas de tu institución o qué te gustaría conocer..."></textarea>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn--primary">
+                        <i class="fas fa-paper-plane"></i>
+                        Enviar Solicitud
+                    </button>
+                    <button type="button" class="btn btn--secondary" onclick="closePricingForm()">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
+    <!-- Botón flotante de WhatsApp -->
+    <a href="https://wa.me/526645290620" class="whatsapp-float" target="_blank" aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 </body>
 
 </html>

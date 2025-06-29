@@ -1,6 +1,15 @@
 // === MODAL FUNCTIONALITY ===
-function openPricingForm() {
+function openPricingForm(buttonType = 'demo') {
     const modal = document.getElementById('pricing-modal');
+    const tipoSolicitudSelect = document.getElementById('tipo-solicitud');
+
+    // Set default selection based on button type
+    if (buttonType === 'cotizacion' || buttonType === 'quote') {
+        tipoSolicitudSelect.value = 'cotizacion-personalizada';
+    } else {
+        tipoSolicitudSelect.value = 'demo-gratuito';
+    }
+
     modal.classList.add('show');
     document.body.style.overflow = 'hidden';
 }
@@ -11,8 +20,10 @@ function closePricingForm() {
     document.body.style.overflow = 'auto';
 }
 
+// Supabase configuration is loaded from supabase-config.js
+
 // Handle form submission
-function handlePricingFormSubmit(event) {
+async function handlePricingFormSubmit(event) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
@@ -20,12 +31,76 @@ function handlePricingFormSubmit(event) {
 
     console.log('Form data:', data);
 
-    // Show success message
-    showNotification('¡Gracias por tu interés! Te contactaremos pronto con la cotización personalizada.', 'success');
-    closePricingForm();
+    // Show loading state
+    const submitBtn = event.target.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+    submitBtn.disabled = true;
 
-    // Reset form
-    event.target.reset();
+    try {
+        // Prepare data for Supabase
+        const supabaseData = {
+            tipo_solicitud: data['tipo-solicitud'],
+            correo: data['email'],
+            telefono: data['telefono'] || null,
+            nombre_institucion: data['institucion'],
+            tipo_institucion: data['tipo-institucion'],
+            cantidad_alumnos: data['cantidad-alumnos'],
+            responsable: data['responsable'],
+            mensaje: data['mensaje'] || null
+        };
+
+        // Check if Supabase is configured
+        if (!window.SUPABASE_CONFIG ||
+            window.SUPABASE_CONFIG.url === 'YOUR_SUPABASE_URL_HERE' ||
+            window.SUPABASE_CONFIG.anonKey === 'YOUR_SUPABASE_ANON_KEY_HERE') {
+            throw new Error('Supabase no está configurado. Por favor configura supabase-config.js');
+        }
+
+        // Send to Supabase
+        const response = await fetch(`${window.SUPABASE_CONFIG.url}/rest/v1/contacto_webpage`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'apikey': window.SUPABASE_CONFIG.anonKey,
+                'Authorization': `Bearer ${window.SUPABASE_CONFIG.anonKey}`,
+                'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify(supabaseData)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error ${response.status}: ${response.statusText}`);
+        }
+
+        // Get the type of request to customize the message
+        const tipoSolicitud = data['tipo-solicitud'];
+        let message = '¡Gracias por tu interés! Te contactaremos pronto.';
+
+        switch (tipoSolicitud) {
+            case 'demo-gratuito':
+                message = '¡Gracias por solicitar el demo! Te contactaremos pronto para programar una demostración personalizada.';
+                break;
+            case 'cotizacion-personalizada':
+                message = '¡Gracias por tu interés! Te contactaremos pronto con la cotización personalizada.';
+                break;
+        }
+
+        // Show success message
+        showNotification(message, 'success');
+        closePricingForm();
+
+        // Reset form
+        event.target.reset();
+
+    } catch (error) {
+        console.error('Error submitting form:', error);
+        showNotification('Hubo un error al enviar el formulario. Por favor, inténtalo de nuevo.', 'error');
+    } finally {
+        // Restore button state
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    }
 }
 
 // Close modal when clicking outside
@@ -47,8 +122,8 @@ document.addEventListener('DOMContentLoaded', function () {
             navToggle.classList.toggle('active');
         });
 
-        // Close menu when clicking on a link
-        const navLinks = document.querySelectorAll('.nav__link');
+        // Close menu when clicking on a link (except dropdown toggles)
+        const navLinks = document.querySelectorAll('.nav__link:not(.nav__dropdown-toggle)');
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('show');
@@ -56,6 +131,54 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
+
+    // === MOBILE DROPDOWN FUNCTIONALITY ===
+    const dropdownToggles = document.querySelectorAll('.nav__dropdown-toggle');
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', function (e) {
+            // Always prevent default navigation for dropdown toggles
+            e.preventDefault();
+
+            // Only handle dropdown behavior on mobile
+            if (window.innerWidth <= 768) {
+                const dropdown = this.closest('.nav__dropdown');
+                const isActive = dropdown.classList.contains('active');
+
+                // Close all other dropdowns
+                document.querySelectorAll('.nav__dropdown').forEach(otherDropdown => {
+                    if (otherDropdown !== dropdown) {
+                        otherDropdown.classList.remove('active');
+                    }
+                });
+
+                // Toggle current dropdown
+                dropdown.classList.toggle('active', !isActive);
+            }
+        });
+    });
+
+    // Close dropdowns when clicking on dropdown links
+    const dropdownLinks = document.querySelectorAll('.nav__dropdown-link');
+    dropdownLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            // Close dropdown
+            document.querySelectorAll('.nav__dropdown').forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+            // Close mobile menu
+            navMenu.classList.remove('show');
+            navToggle.classList.remove('active');
+        });
+    });
+
+    // Handle window resize - close dropdowns when switching to desktop
+    window.addEventListener('resize', function () {
+        if (window.innerWidth > 768) {
+            document.querySelectorAll('.nav__dropdown').forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+    });
 });
 
 // === SMOOTH SCROLLING ===

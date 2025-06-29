@@ -44,7 +44,7 @@
                     <a href="hardware-control-asistencia.html" class="nav__link">Hardware</a>
                 </li>
                 <li class="nav__item">
-                    <a href="index.html#contacto" class="nav__link nav__cta">Solicitar Demo</a>
+                    <button class="nav__link nav__cta" onclick="openPricingForm()">Solicitar Demo</button>
                 </li>
             </ul>
             <div class="nav__toggle" id="nav-toggle">
@@ -67,10 +67,10 @@
                         colores y logo de tu institución educativa.
                     </p>
                     <div class="hero__buttons">
-                        <a href="index.html#contacto" class="btn btn--primary">
+                        <button class="btn btn--primary" onclick="openPricingForm()">
                             <i class="fas fa-palette"></i>
                             Solicitar Diseño
-                        </a>
+                        </button>
                         <a href="#caracteristicas" class="btn btn--secondary">
                             <i class="fas fa-id-card"></i>
                             Ver Características
@@ -137,20 +137,6 @@
                         <li>Colores institucionales</li>
                         <li>Tipografía personalizada</li>
                         <li>Elementos gráficos únicos</li>
-                    </ul>
-                </div>
-
-                <div class="feature-card-credential">
-                    <div class="feature-icon-credential">
-                        <i class="fas fa-print"></i>
-                    </div>
-                    <h3>Impresión de Alta Calidad</h3>
-                    <p>Tecnología de impresión profesional con colores vivos y duraderos</p>
-                    <ul class="feature-specs">
-                        <li>Impresión full color</li>
-                        <li>Resolución 300 DPI</li>
-                        <li>Colores resistentes a UV</li>
-                        <li>Acabado mate o brillante</li>
                     </ul>
                 </div>
             </div>
@@ -258,110 +244,6 @@
         </div>
     </section>
 
-
-
-    <!-- Especificaciones Técnicas -->
-    <section class="section tech-specs-credentials">
-        <div class="container">
-            <div class="section__header">
-                <span class="section__tag">📋 ESPECIFICACIONES</span>
-                <h2 class="section__title">Especificaciones Técnicas</h2>
-            </div>
-
-            <div class="specs-grid-credentials">
-                <div class="specs-card">
-                    <h3><i class="fas fa-ruler"></i> Dimensiones</h3>
-                    <table class="specs-table">
-                        <tr>
-                            <td>Tamaño</td>
-                            <td>85.6 x 54 mm (estándar ISO)</td>
-                        </tr>
-                        <tr>
-                            <td>Grosor</td>
-                            <td>0.76 mm</td>
-                        </tr>
-                        <tr>
-                            <td>Esquinas</td>
-                            <td>Redondeadas 3.18 mm</td>
-                        </tr>
-                        <tr>
-                            <td>Peso</td>
-                            <td>5.5 gramos aprox.</td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div class="specs-card">
-                    <h3><i class="fas fa-cog"></i> Material</h3>
-                    <table class="specs-table">
-                        <tr>
-                            <td>Material</td>
-                            <td>PVC blanco de alta calidad</td>
-                        </tr>
-                        <tr>
-                            <td>Resistencia</td>
-                            <td>Agua, rayones, flexión</td>
-                        </tr>
-                        <tr>
-                            <td>Durabilidad</td>
-                            <td>3+ años de uso normal</td>
-                        </tr>
-                        <tr>
-                            <td>Temperatura</td>
-                            <td>-20°C a +60°C</td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div class="specs-card">
-                    <h3><i class="fas fa-print"></i> Impresión</h3>
-                    <table class="specs-table">
-                        <tr>
-                            <td>Tecnología</td>
-                            <td>Impresión digital directa</td>
-                        </tr>
-                        <tr>
-                            <td>Resolución</td>
-                            <td>300 DPI</td>
-                        </tr>
-                        <tr>
-                            <td>Colores</td>
-                            <td>CMYK full color</td>
-                        </tr>
-                        <tr>
-                            <td>Acabado</td>
-                            <td>Mate o brillante</td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div class="specs-card">
-                    <h3><i class="fas fa-qrcode"></i> Código QR</h3>
-                    <table class="specs-table">
-                        <tr>
-                            <td>Tamaño</td>
-                            <td>20x20 mm</td>
-                        </tr>
-                        <tr>
-                            <td>Resolución</td>
-                            <td>Alta definición</td>
-                        </tr>
-                        <tr>
-                            <td>Encriptación</td>
-                            <td>Seguridad avanzada</td>
-                        </tr>
-                        <tr>
-                            <td>Legibilidad</td>
-                            <td>99.9% de precisión</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
     <!-- CTA Section -->
     <section class="section cta-section">
         <div class="container">
@@ -371,10 +253,10 @@
                     Solicita una muestra del diseño personalizado para tu institución educativa
                 </p>
                 <div class="cta-buttons">
-                    <a href="index.html#contacto" class="btn btn--primary btn--large">
+                    <button class="btn btn--primary btn--large" onclick="openPricingForm()">
                         <i class="fas fa-palette"></i>
                         Solicitar Diseño Personalizado
-                    </a>
+                    </button>
                     <a href="index.html" class="btn btn--secondary btn--large">
                         <i class="fas fa-arrow-left"></i>
                         Volver al Inicio
@@ -383,6 +265,93 @@
             </div>
         </div>
     </section>
+
+    <!-- Contact Form Modal -->
+    <div class="modal" id="pricing-modal" onclick="handleModalClick(event)">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Solicitar Información y Contacto</h3>
+                <span class="modal-close" onclick="closePricingForm()">&times;</span>
+            </div>
+            <form class="pricing-form" id="pricing-form" onsubmit="handlePricingFormSubmit(event)">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="tipo-solicitud">Tipo de Solicitud *</label>
+                        <select id="tipo-solicitud" name="tipo-solicitud" required>
+                            <option value="demo-gratuito">Demo Gratuito</option>
+                            <option value="cotizacion-personalizada">Cotización Personalizada</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono">WhatsApp</label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="Ej: +52-664-529-0620 (opcional)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="institucion">Nombre de la Institución *</label>
+                        <input type="text" id="institucion" name="institucion" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tipo-institucion">Tipo de Institución *</label>
+                        <select id="tipo-institucion" name="tipo-institucion" required>
+                            <option value="">Seleccionar tipo</option>
+                            <option value="escuela-privada">Escuela Privada</option>
+                            <option value="organizacion-gubernamental">Organización Gubernamental</option>
+                            <option value="jardin-infantes">Jardín de Infantes</option>
+                            <option value="primaria">Primaria</option>
+                            <option value="secundaria">Secundaria</option>
+                            <option value="preparatoria">Preparatoria</option>
+                            <option value="universidad">Universidad</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cantidad-alumnos">Cantidad de Alumnos (Aproximado) *</label>
+                        <select id="cantidad-alumnos" name="cantidad-alumnos" required>
+                            <option value="">Seleccionar rango</option>
+                            <option value="50-100">50 - 100 estudiantes</option>
+                            <option value="101-300">101 - 300 estudiantes</option>
+                            <option value="301-500">301 - 500 estudiantes</option>
+                            <option value="501-1000">501 - 1,000 estudiantes</option>
+                            <option value="1001-2000">1,001 - 2,000 estudiantes</option>
+                            <option value="2001-5000">2,001 - 5,000 estudiantes</option>
+                            <option value="5000+">Más de 5,000 estudiantes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="responsable">Responsable / Cargo *</label>
+                        <input type="text" id="responsable" name="responsable" required
+                            placeholder="Ej: Juan Pérez - Director">
+                    </div>
+
+                    <div class="form-group form-group--full">
+                        <label for="mensaje">Mensaje Adicional</label>
+                        <textarea id="mensaje" name="mensaje" rows="4"
+                            placeholder="Cuéntanos sobre necesidades específicas de tu institución o qué te gustaría conocer..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn--primary">
+                        <i class="fas fa-paper-plane"></i>
+                        Enviar Solicitud
+                    </button>
+                    <button type="button" class="btn btn--secondary" onclick="closePricingForm()">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -409,11 +378,11 @@
                 </div>
 
                 <div class="footer-section">
-                    <h4 class="footer-title">Diseño</h4>
+                    <h4 class="footer-title">Soporte</h4>
                     <ul class="footer-links">
-                        <li><a href="#">Galería de Diseños</a></li>
-                        <li><a href="#">Proceso de Personalización</a></li>
-                        <li><a href="#">Especificaciones Técnicas</a></li>
+                        <li><a href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
+                        <li><a href="terminos-servicio.html">Términos de Servicio</a></li>
+                        <li><a href="politicas-privacidad.html">Política de Privacidad</a></li>
                     </ul>
                 </div>
             </div>
@@ -425,7 +394,71 @@
     </footer>
 
     <!-- JavaScript -->
+    <script src="supabase-config.js"></script>
     <script src="script.js"></script>
+    <script>
+        // === MODAL FUNCTIONALITY ===
+        function openPricingForm() {
+            const modal = document.getElementById('pricing-modal');
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePricingForm() {
+            const modal = document.getElementById('pricing-modal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Handle form submission
+        function handlePricingFormSubmit(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+
+            console.log('Form data:', data);
+
+            // Get the type of request to customize the message
+            const tipoSolicitud = data['tipo-solicitud'];
+            let message = '¡Gracias por tu interés! Te contactaremos pronto.';
+
+            switch (tipoSolicitud) {
+                case 'demo-gratuito':
+                    message = '¡Gracias por solicitar el demo! Te contactaremos pronto para programar una demostración personalizada.';
+                    break;
+                case 'cotizacion-personalizada':
+                    message = '¡Gracias por tu interés! Te contactaremos pronto con la cotización personalizada.';
+                    break;
+                case 'consulta-general':
+                    message = '¡Gracias por tu consulta! Te contactaremos pronto para resolver tus dudas.';
+                    break;
+                case 'hablar-especialista':
+                    message = '¡Gracias por tu interés! Un especialista te contactará pronto para ayudarte.';
+                    break;
+            }
+
+            // Show success message
+            alert(message);
+            closePricingForm();
+
+            // Reset form
+            event.target.reset();
+        }
+
+        // Close modal when clicking outside
+        function handleModalClick(event) {
+            const modal = document.getElementById('pricing-modal');
+            if (event.target === modal) {
+                closePricingForm();
+            }
+        }
+    </script>
+
+    <!-- Botón flotante de WhatsApp -->
+    <a href="https://wa.me/526645290620" class="whatsapp-float" target="_blank" aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 </body>
 
 </html>

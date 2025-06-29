@@ -101,9 +101,9 @@
                     <a href="#inicio" class="nav__link">Inicio</a>
                 </li>
                 <li class="nav__item nav__dropdown">
-                    <a href="#como-funciona" class="nav__link nav__dropdown-toggle">
+                    <button class="nav__link nav__dropdown-toggle">
                         Producto <i class="fas fa-chevron-down"></i>
-                    </a>
+                    </button>
                     <div class="nav__dropdown-menu">
                         <a href="#como-funciona" class="nav__dropdown-link">Cómo Funciona</a>
                         <a href="#pasos-simples" class="nav__dropdown-link">Implementación</a>
@@ -117,7 +117,7 @@
                     <a href="#casos-reales" class="nav__link">Testimonios</a>
                 </li>
                 <li class="nav__item">
-                    <a href="#contacto" class="nav__link nav__cta">Solicitar Demo</a>
+                    <button class="nav__link nav__cta" onclick="openPricingForm()">Solicitar Demo</button>
                 </li>
             </ul>
             <div class="nav__toggle" id="nav-toggle">
@@ -142,10 +142,10 @@
                             sostenible para tu institución educativa.</strong>
                     </p>
                     <div class="hero__buttons">
-                        <a href="#contacto" class="btn btn--primary">
+                        <button class="btn btn--primary" onclick="openPricingForm()">
                             <i class="fas fa-rocket"></i>
                             Solicitar Demo Gratuita
-                        </a>
+                        </button>
                         <a href="#como-funciona" class="btn btn--secondary">
                             <i class="fas fa-play"></i>
                             Ver Cómo Funciona
@@ -161,7 +161,7 @@
                             <span class="hero__stat-label">Satisfacción de Padres</span>
                         </div>
                         <div class="hero__stat">
-                            <span class="hero__stat-number">98%</span>
+                            <span class="hero__stat-number">100%</span>
                             <span class="hero__stat-label">Notificaciones Exitosas</span>
                         </div>
                     </div>
@@ -355,18 +355,31 @@
         </div>
     </section>
 
-    <!-- Pricing Form Modal -->
+    <!-- Contact Form Modal -->
     <div class="modal" id="pricing-modal" onclick="handleModalClick(event)">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Solicitar Cotización Personalizada</h3>
+                <h3>Solicitar Información y Contacto</h3>
                 <span class="modal-close" onclick="closePricingForm()">&times;</span>
             </div>
             <form class="pricing-form" id="pricing-form" onsubmit="handlePricingFormSubmit(event)">
                 <div class="form-grid">
                     <div class="form-group">
+                        <label for="tipo-solicitud">Tipo de Solicitud *</label>
+                        <select id="tipo-solicitud" name="tipo-solicitud" required>
+                            <option value="demo-gratuito">Demo Gratuito</option>
+                            <option value="cotizacion-personalizada">Cotización Personalizada</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="email">Correo Electrónico *</label>
                         <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono">WhatsApp</label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="Ej: +52-664-529-0620 (opcional)">
                     </div>
 
                     <div class="form-group">
@@ -412,7 +425,7 @@
                     <div class="form-group form-group--full">
                         <label for="mensaje">Mensaje Adicional</label>
                         <textarea id="mensaje" name="mensaje" rows="4"
-                            placeholder="Cuéntanos sobre necesidades específicas de tu institución..."></textarea>
+                            placeholder="Cuéntanos sobre necesidades específicas de tu institución o qué te gustaría conocer..."></textarea>
                     </div>
                 </div>
 
@@ -469,59 +482,63 @@
                     </div>
 
                     <div class="revenue-results-modern">
-                        <div class="result-card-modern cost">
-                            <div class="result-header">
-                                <div class="result-icon-modern">
-                                    <i class="fas fa-receipt"></i>
+                        <div class="result-row-modern">
+                            <div class="result-card-modern cost">
+                                <div class="result-header">
+                                    <div class="result-icon-modern">
+                                        <i class="fas fa-receipt"></i>
+                                    </div>
+                                    <div class="result-info">
+                                        <span class="result-label-modern">Costo Base (Ejemplo)</span>
+                                        <div class="result-value-modern large" id="base-cost">$200</div>
+                                        <div class="result-description-modern">Por estudiante</div>
+                                    </div>
                                 </div>
-                                <div class="result-info">
-                                    <span class="result-label-modern">Costo Base (Ejemplo)</span>
-                                    <div class="result-value-modern" id="base-cost">$200</div>
-                                    <div class="result-description-modern">Por estudiante</div>
+                                <div class="result-note">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span>El costo real depende de factores como tipo de escuela, capacidad, convenios,
+                                        etc.</span>
                                 </div>
                             </div>
-                            <div class="result-note">
-                                <i class="fas fa-info-circle"></i>
-                                <span>El costo real depende de factores como tipo de escuela, capacidad, convenios,
-                                    etc.</span>
-                            </div>
-                        </div>
 
-                        <div class="result-card-modern price">
-                            <div class="result-header">
-                                <div class="result-icon-modern">
-                                    <i class="fas fa-tag"></i>
-                                </div>
-                                <div class="result-info">
-                                    <span class="result-label-modern">Tu Precio de Venta</span>
-                                    <div class="result-value-modern" id="sale-price">$250</div>
-                                    <div class="result-description-modern">Por estudiante</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="result-card-modern profit">
-                            <div class="result-header">
-                                <div class="result-icon-modern">
-                                    <i class="fas fa-chart-line"></i>
-                                </div>
-                                <div class="result-info">
-                                    <span class="result-label-modern">Ganancia por Estudiante</span>
-                                    <div class="result-value-modern" id="profit-per-student">$50</div>
-                                    <div class="result-description-modern">Margen de ganancia</div>
+                            <div class="result-card-modern price">
+                                <div class="result-header">
+                                    <div class="result-icon-modern">
+                                        <i class="fas fa-tag"></i>
+                                    </div>
+                                    <div class="result-info">
+                                        <span class="result-label-modern">Tu Precio de Venta</span>
+                                        <div class="result-value-modern large" id="sale-price">$250</div>
+                                        <div class="result-description-modern">Por estudiante</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="result-card-modern total-profit">
-                            <div class="result-header">
-                                <div class="result-icon-modern">
-                                    <i class="fas fa-coins"></i>
+                        <div class="result-row-modern">
+                            <div class="result-card-modern profit">
+                                <div class="result-header">
+                                    <div class="result-icon-modern">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <div class="result-info">
+                                        <span class="result-label-modern">Ganancia por Estudiante</span>
+                                        <div class="result-value-modern large" id="profit-per-student">$50</div>
+                                        <div class="result-description-modern">Margen de ganancia</div>
+                                    </div>
                                 </div>
-                                <div class="result-info">
-                                    <span class="result-label-modern">Ganancia Total Mensual</span>
-                                    <div class="result-value-modern" id="total-profit">$15,000</div>
-                                    <div class="result-description-modern">Ingresos adicionales</div>
+                            </div>
+
+                            <div class="result-card-modern total-profit">
+                                <div class="result-header">
+                                    <div class="result-icon-modern">
+                                        <i class="fas fa-coins"></i>
+                                    </div>
+                                    <div class="result-info">
+                                        <span class="result-label-modern">Ganancia Total Mensual</span>
+                                        <div class="result-value-modern large" id="total-profit">$15,000</div>
+                                        <div class="result-description-modern">Ingresos adicionales</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -564,7 +581,7 @@
                         <p>Obtén una cotización personalizada basada en las necesidades específicas de tu institución
                         </p>
                     </div>
-                    <button class="btn btn--primary btn--large" onclick="openPricingForm()">
+                    <button class="btn btn--primary btn--large" onclick="openPricingForm('cotizacion')">
                         <i class="fas fa-calculator"></i>
                         Solicitar Cotización Personalizada
                     </button>
@@ -693,7 +710,7 @@
                             <i class="fas fa-headset"></i>
                         </div>
                         <h3 class="step-title-enhanced">Soporte</h3>
-                        <p class="step-description-enhanced">Soporte técnico continuo en español</p>
+                        <p class="step-description-enhanced">Soporte técnico continuo en español y en inglés</p>
                         <div class="step-status">
                             <div class="status-dot"></div>
                             <span>Acompañamiento</span>
@@ -825,10 +842,6 @@
                 </div>
                 <div class="advantage-stats">
                     <div class="stat-item">
-                        <span class="stat-number">+300%</span>
-                        <span class="stat-label">ROI Promedio</span>
-                    </div>
-                    <div class="stat-item">
                         <span class="stat-number">98%</span>
                         <span class="stat-label">Satisfacción</span>
                     </div>
@@ -934,85 +947,7 @@
         </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="section faq">
-        <div class="container">
-            <div class="section__header">
-                <span class="section__tag">❓ FAQ ESTRATÉGICO</span>
-                <h2 class="section__title">Preguntas frecuentes</h2>
-                <p class="section__description">
-                    Resolvemos las dudas más comunes sobre la implementación y funcionamiento
-                </p>
-            </div>
 
-            <div class="faq-list">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>¿Cómo funciona el modelo de ingresos?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p><strong>Es muy simple y transparente:</strong> Nosotros te ofrecemos nuestro servicio
-                            completo con un costo base de <strong>$200 pesos por alumno</strong>. Tu escuela puede
-                            cobrar a los padres entre <strong>$250-300 pesos por alumno</strong> (precio muy accesible).
-                            <strong>La diferencia de $50-100 pesos por cada alumno es tu ganancia pura.</strong> Por
-                            ejemplo, con 500 alumnos ganarías entre $25,000-50,000 pesos adicionales para tu escuela.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>¿Qué pasa si un padre no quiere pagar?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>El sistema incluye opciones flexibles: becas familiares para casos especiales, períodos de
-                            prueba gratuitos, y la posibilidad de que la escuela subsidie el costo para familias de
-                            bajos recursos. Nuestro enfoque es inclusivo y garantiza que todos los estudiantes puedan
-                            beneficiarse del sistema.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>¿Cómo se instalan los lectores QR?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Nuestro equipo técnico realiza la instalación profesional del sistema centralizado. El lector
-                            QR físico se conecta directamente a la tablet Android mediante USB o Bluetooth.
-                            Proporcionamos soporte ajustable para ubicación estratégica, batería externa y orientación
-                            completa para el personal escolar.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>¿Qué soporte incluye?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Incluimos soporte técnico 24/7 en español, actualizaciones automáticas del software,
-                            mantenimiento de equipos, capacitación continua del personal, atención personalizada vía
-                            WhatsApp, y un gerente de cuenta dedicado para resolver cualquier incidencia.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>¿Funciona sin internet?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Sí, el sistema funciona en modo offline almacenando los registros localmente. Cuando se
-                            restablece la conexión, todos los datos se sincronizan automáticamente. Esto garantiza que
-                            el control de asistencia nunca se interrumpa, incluso durante cortes de internet.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- CTA Section -->
     <section class="section cta-section" id="contacto">
@@ -1024,29 +959,28 @@
                     Solicita tu demo gratuita y descubre cómo podemos ayudarte.
                 </p>
 
+                <div class="cta-separator"></div>
+
                 <div class="cta-buttons">
-                    <a href="#" class="btn btn--primary btn--large">
+                    <button class="btn btn--primary btn--large" onclick="openPricingForm()">
                         <i class="fas fa-calendar-check"></i>
                         Solicitar Demo Gratuita
-                    </a>
-                    <a href="#" class="btn btn--secondary btn--large">
-                        <i class="fas fa-phone"></i>
-                        Hablar con un Especialista
+                    </button>
+                    <a class="btn btn--secondary btn--large" href="https://wa.me/526645290620" target="_blank"
+                        rel="noopener" aria-label="Contactar por WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                        Contactar por WhatsApp
                     </a>
                 </div>
 
                 <div class="contact-info">
                     <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <span>+52 55 1234 5678</span>
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp: +52-664-529-0620</span>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <span>contacto@alertaescolar.com</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fab fa-whatsapp"></i>
-                        <span>WhatsApp: +52 55 9876 5432</span>
+                        <span>contacto@alertaescolar.mx</span>
                     </div>
                 </div>
             </div>
@@ -1067,17 +1001,9 @@
                         Solución tecnológica que mejora la seguridad y comunicación entre escuelas y padres de familia.
                     </p>
                     <div class="social-links">
-                        <a href="#" class="social-link">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-linkedin"></i>
+                        <a href="https://wa.me/526645290620" class="social-link" target="_blank" rel="noopener"
+                            aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
                         </a>
                     </div>
                 </div>
@@ -1096,22 +1022,11 @@
                 </div>
 
                 <div class="footer-section">
-                    <h4 class="footer-title">Empresa</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Acerca de</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Carreras</a></li>
-                        <li><a href="#">Prensa</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-section">
                     <h4 class="footer-title">Soporte</h4>
                     <ul class="footer-links">
-                        <li><a href="#">Centro de Ayuda</a></li>
-                        <li><a href="#">Contacto</a></li>
-                        <li><a href="#">Términos de Servicio</a></li>
-                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
+                        <li><a href="terminos-servicio.html">Términos de Servicio</a></li>
+                        <li><a href="politicas-privacidad.html">Política de Privacidad</a></li>
                     </ul>
                 </div>
             </div>
@@ -1126,6 +1041,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <!-- JavaScript -->
+    <script src="supabase-config.js"></script>
     <script src="script.js"></script>
 
     <!-- Interactive Process Flow Script -->
@@ -1263,6 +1179,11 @@
             });
         });
     </script>
+
+    <!-- Botón flotante de WhatsApp -->
+    <a href="https://wa.me/526645290620" class="whatsapp-float" target="_blank" aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 </body>
 
 </html>
